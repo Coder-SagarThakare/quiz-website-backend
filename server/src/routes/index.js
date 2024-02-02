@@ -3,10 +3,12 @@ const router = express.Router();
 
 const authRoute = require("./auth.route");
 const userRoute = require("./user.route");
+const teacherRoutes  = require("./teacher.route");
 
 const defaultRoutes = [
   { path: "/auth", route: authRoute }, // base path for auth routes
   { path: "/user", route: userRoute }, // base path for user routes
+  { path: "/teacher", route: teacherRoutes }, // base path for teacher routes
 ];
 
 defaultRoutes.map((route) => {
