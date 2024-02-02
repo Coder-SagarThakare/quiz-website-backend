@@ -7,4 +7,15 @@ const addNewSubject = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(response);
 });
 
-module.exports = { addNewSubject };
+const addTopics = catchAsync(async (req, res) => {
+
+  console.log(req.params.subject_id);
+  const response = await subjectService.addTopics(
+    req.params.subject_id,
+    req.body
+  );
+
+  res.status(httpStatus.CREATED).send(response)
+});
+
+module.exports = { addNewSubject, addTopics };

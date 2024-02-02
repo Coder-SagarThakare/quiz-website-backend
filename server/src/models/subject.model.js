@@ -14,9 +14,9 @@ const subjectSchema = mongoose.Schema({
 });
 
 subjectSchema.statics.isSubjectTaken = async function (subject) {
-  const res = await this.findOne({ name: subject });
-  console.log(res);
-  return !!res;
+  const resp = await this.findOne({ name: subject });
+  console.log('resp',resp, subject);
+  return !!resp;
 };
 
 const subject = mongoose.model("subject", subjectSchema);

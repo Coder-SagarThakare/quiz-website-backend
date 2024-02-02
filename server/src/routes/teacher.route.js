@@ -4,10 +4,8 @@ const { subjectValidation } = require("../validations");
 
 const router = require("express").Router();
 
-
 // use middleware for authorise teacher
 // route.use(auth())
-
 
 router
   .route("/add-subject")
@@ -15,5 +13,7 @@ router
     validate(subjectValidation.addNewSubject),
     subjectController.addNewSubject
   );
+
+router.route("/subject/:subject_id").post(subjectController.addTopics);
 
 module.exports = router;
