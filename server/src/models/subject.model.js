@@ -13,6 +13,12 @@ const subjectSchema = mongoose.Schema({
   ],
 });
 
+subjectSchema.statics.isSubjectTaken = async function (subject) {
+  const res = await this.findOne({ name: subject });
+  console.log(res);
+  return !!res;
+};
+
 const subject = mongoose.model("subject", subjectSchema);
 
 module.exports = subject;

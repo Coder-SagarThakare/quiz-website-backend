@@ -1,6 +1,6 @@
-const { teacherController } = require("../controllers");
+const { subjectController } = require("../controllers");
 const validate = require("../middlewares/validate");
-const { teacherValidation } = require("../validations");
+const { subjectValidation } = require("../validations");
 
 const router = require("express").Router();
 
@@ -12,8 +12,8 @@ const router = require("express").Router();
 router
   .route("/add-subject")
   .post(
-    validate(teacherValidation.addNewSubject),
-    teacherController.addNewSubject
+    validate(subjectValidation.addNewSubject),
+    subjectController.addNewSubject
   );
-    
+
 module.exports = router;
