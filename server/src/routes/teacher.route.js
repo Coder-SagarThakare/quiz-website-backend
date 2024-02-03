@@ -14,6 +14,6 @@ router
     subjectController.addNewSubject
   );
 
-router.route("/subject/:subject_id").post(subjectController.addTopics);
+router.route("/subject/:subject_id").post(validate(subjectValidation.addTopic), subjectController.addTopic);
 
 module.exports = router;

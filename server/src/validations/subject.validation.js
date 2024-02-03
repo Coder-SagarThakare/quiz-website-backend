@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const { objectId } = require("./custom.validation");
 
 const addNewSubject = {
   body: Joi.object().keys({
@@ -6,10 +7,13 @@ const addNewSubject = {
   }),
 };
 
-const addTopics = {
-  body : Joi.object().keys({
-    topics : Joi.array().items(Joi.string().required()).required()
+const addTopic = {
+  body: Joi.object().keys({
+    topic: Joi.string().trim().required()
+  }),
+  params: Joi.object().keys({
+    subject_id: Joi.string().required().custom(objectId)
   })
 }
 
-module.exports = { addNewSubject };
+module.exports = { addNewSubject, addTopic };

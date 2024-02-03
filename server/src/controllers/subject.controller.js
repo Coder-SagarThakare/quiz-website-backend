@@ -7,15 +7,17 @@ const addNewSubject = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(response);
 });
 
-const addTopics = catchAsync(async (req, res) => {
+const addTopic = catchAsync(async (req, res) => {
 
-  console.log(req.params.subject_id);
-  const response = await subjectService.addTopics(
+  req.body.topic = req.body.topic.toLowerCase()
+  
+  await subjectService.addTopic(
     req.params.subject_id,
-    req.body
+    req.body.topic
   );
 
-  res.status(httpStatus.CREATED).send(response)
+  res.status(httpStatus.CREATED).send({ message: "topic added successfully" })
+  // res.status(httpStatus.CREATED).send(response)
 });
 
-module.exports = { addNewSubject, addTopics };
+module.exports = { addNewSubject, addTopic };
