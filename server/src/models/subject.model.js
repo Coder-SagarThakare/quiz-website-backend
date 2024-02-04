@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const ApiError = require("../utils/ApiError");
 const httpStatus = require("http-status");
+const { private } = require("./plugins");
+
 
 const subjectSchema = mongoose.Schema({
   name: {
@@ -11,9 +13,10 @@ const subjectSchema = mongoose.Schema({
     {
       type: String,
       required: true,
+      unique: true
     },
   ],
-});
+}, { timestamp: true });
 
 subjectSchema.statics.isSubjectTaken = async function (subject) {
   const resp = await this.findOne({ name: subject });
@@ -21,19 +24,21 @@ subjectSchema.statics.isSubjectTaken = async function (subject) {
   return !!resp;
 };
 
-subjectSchema.statics.isTopicTaken = async function (subjectId, topic) {
+  subjectSchema.statics.isTopicTaken = async function (subjectId, topic) {
 
-  const data = await this.findOne({ _id: subjectId })
+    const data = await this.findOne({ _id: subjectId })
 
-  // does we really need to throw this
-  if (!data)
-    throw new ApiError(httpStatus.NOT_FOUND, "Please enter valid mongo id");
+    // does we really need to throw this
+    if (!data)
+      throw new ApiError(httpStatus.NOT_FOUND, "Please enter valid mongo id");
 
-  const isAlreadyAdded = data.topics.includes(topic)
+    const isAlreadyAdded = data.topics.includes(topic)
 
-  return isAlreadyAdded;
+    return isAlreadyAdded;
 
-}
+  }
+
+subjectSchema.plugin(private);
 
 const subject = mongoose.model("subject", subjectSchema);
 

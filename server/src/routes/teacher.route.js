@@ -7,13 +7,21 @@ const router = require("express").Router();
 // use middleware for authorise teacher
 // route.use(auth())
 
+
+// to add a new subject
 router
   .route("/add-subject")
-  .post(
-    validate(subjectValidation.addNewSubject),
-    subjectController.addNewSubject
-  );
+  .post(validate(subjectValidation.addNewSubject), subjectController.addNewSubject);
 
-router.route("/subject/:subject_id").post(validate(subjectValidation.addTopic), subjectController.addTopic);
+// get ,delete subject
+router.route('/subject/:subject_id')
+  .get(validate(subjectValidation.getSubjectById), subjectController.getSubjectById)
+  .post(validate(subjectValidation.updateSubjectById), subjectController.updateSubjectById)
+  .delete(validate(subjectValidation.deleteSubjectById), subjectController.deleteSubjectById)
+
+// add topics to perticular subject 
+router.route("/subject/:subject_id/add-topic")
+  .post(validate(subjectValidation.addTopic), subjectController.addTopic)
+
 
 module.exports = router;
