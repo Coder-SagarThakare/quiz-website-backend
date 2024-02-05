@@ -3,7 +3,6 @@ const ApiError = require("../utils/ApiError");
 const httpStatus = require("http-status");
 const { private } = require("./plugins");
 
-
 const subjectSchema = mongoose.Schema({
   name: {
     type: String,
@@ -13,7 +12,6 @@ const subjectSchema = mongoose.Schema({
     {
       type: String,
       required: true,
-      unique: true
     },
   ],
 }, { timestamp: true });
