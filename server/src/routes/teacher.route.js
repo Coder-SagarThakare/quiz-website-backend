@@ -25,7 +25,7 @@ router.route("/subject/:subject_id/add-topic")
   .post(validate(topicValidation.addNewTopic), topicController.addNewTopic)
 
   router.route("/subject/topic/:topic_id")
-  .patch()
+  .get(validate(topicValidation.getTopicById),(req,res)=>{res.send('dsdsds')})
 
 
 module.exports = router;
