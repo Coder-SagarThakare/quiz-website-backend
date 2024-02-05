@@ -1,3 +1,4 @@
 module.exports.authController = require('./auth.controller')
 module.exports.userController = require("./user.controller")
 module.exports.subjectController = require("./subject.controller")
+module.exports.topicController = require("./topic.controller")

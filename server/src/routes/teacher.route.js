@@ -1,6 +1,6 @@
-const { subjectController } = require("../controllers");
+const { subjectController, topicController } = require("../controllers");
 const validate = require("../middlewares/validate");
-const { subjectValidation } = require("../validations");
+const { subjectValidation, topicValidation } = require("../validations");
 
 const router = require("express").Router();
 
@@ -16,12 +16,16 @@ router
 // get ,delete subject
 router.route('/subject/:subject_id')
   .get(validate(subjectValidation.getSubjectById), subjectController.getSubjectById)
-  .post(validate(subjectValidation.updateSubjectById), subjectController.updateSubjectById)
+  .patch(validate(subjectValidation.updateSubjectById), subjectController.updateSubjectById)
   .delete(validate(subjectValidation.deleteSubjectById), subjectController.deleteSubjectById)
 
+  
 // add topics to perticular subject 
 router.route("/subject/:subject_id/add-topic")
-  .post(validate(subjectValidation.addTopic), subjectController.addTopic)
+  .post(validate(topicValidation.addNewTopic), topicController.addNewTopic)
+
+  router.route("/subject/:subject_id/topic")
+  .patch()
 
 
 module.exports = router;

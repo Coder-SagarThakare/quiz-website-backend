@@ -13,14 +13,26 @@ const addNewSubject = async (body) => {
   return Subject.create(body);
 };
 
+// const addTopic = async (subjectId, topic) => {
+//   const isTopicAdded = await Subject.isTopicTaken(subjectId, topic);
+
+//   if (isTopicAdded)
+//     throw new ApiError(httpStatus.CONFLICT, "Topic is already added")
+
+//   console.log("topic", topic);
+//   await Subject.updateOne({ _id: subjectId }, { $push: { topics: topic } })
+
+//   return;
+// };
+
 const addTopic = async (subjectId, topic) => {
   const isTopicAdded = await Subject.isTopicTaken(subjectId, topic);
 
   if (isTopicAdded)
     throw new ApiError(httpStatus.CONFLICT, "Topic is already added")
 
-  console.log("topic", topic);
-  await Subject.updateOne({ _id: subjectId }, { $push: { topics: topic } })
+  // console.log("topic", topic);
+  // await Subject.updateOne({ _id: subjectId }, { $push: { topics: topic } })
 
   return;
 };

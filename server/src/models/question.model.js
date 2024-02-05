@@ -1,30 +1,31 @@
 const mongoose = require("mongoose");
 const { private } = require("./plugins");
 
-const questionSchema = mongoose.Schema({
-    subject: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "subject",
-        required: true
-    },
+const objectId = mongoose.Schema.Types.ObjectId;
+
+const questionSchema = mongoose.Schema(
+  {
     topic: {
-        type: String,
-        required: true
+      type: objectId,
+      ref : "topic",
+      required: true,
     },
     question: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     options: [{ type: String, required: true }],
     level: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     correctOption: {
-        type: Number,
-        required: true
-    }
-}, { timestamp: true })
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamp: true }
+);
 
 questionSchema.plugin(private);
 

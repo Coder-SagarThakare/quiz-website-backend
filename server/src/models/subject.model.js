@@ -8,12 +8,6 @@ const subjectSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  topics: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
 }, { timestamp: true });
 
 subjectSchema.statics.isSubjectTaken = async function (subject) {
