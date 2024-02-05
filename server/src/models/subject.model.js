@@ -8,7 +8,7 @@ const subjectSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-}, { timestamp: true });
+}, { timestamps: true });
 
 subjectSchema.statics.isSubjectTaken = async function (subject) {
   const resp = await this.findOne({ name: subject });

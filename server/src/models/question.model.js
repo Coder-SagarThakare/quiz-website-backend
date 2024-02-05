@@ -24,7 +24,7 @@ const questionSchema = mongoose.Schema(
       required: true,
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 questionSchema.plugin(private);

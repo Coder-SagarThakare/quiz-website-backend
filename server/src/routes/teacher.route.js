@@ -19,12 +19,12 @@ router.route('/subject/:subject_id')
   .patch(validate(subjectValidation.updateSubjectById), subjectController.updateSubjectById)
   .delete(validate(subjectValidation.deleteSubjectById), subjectController.deleteSubjectById)
 
-  
+
 // add topics to perticular subject 
 router.route("/subject/:subject_id/add-topic")
   .post(validate(topicValidation.addNewTopic), topicController.addNewTopic)
 
-  router.route("/subject/:subject_id/topic")
+  router.route("/subject/topic/:topic_id")
   .patch()
 
 
