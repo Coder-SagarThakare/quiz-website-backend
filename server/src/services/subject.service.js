@@ -2,6 +2,10 @@ const httpStatus = require("http-status");
 const { Subject, Topic } = require("../models");
 const ApiError = require("../utils/ApiError");
 
+const SubjectNotFoundErr = () => {
+  throw new ApiError(httpStatus.NOT_FOUND, "Subject not found ");
+};
+
 const addNewSubject = async (body) => {
   body.name = body.name.toUpperCase();
 
@@ -13,38 +17,19 @@ const addNewSubject = async (body) => {
   return Subject.create(body);
 };
 
-// const addTopic = async (subjectId, topic) => {
-//   const isTopicAdded = await Subject.isTopicTaken(subjectId, topic);
-
-//   if (isTopicAdded)
-//     throw new ApiError(httpStatus.CONFLICT, "Topic is already added")
-
-//   console.log("topic", topic);
-//   await Subject.updateOne({ _id: subjectId }, { $push: { topics: topic } })
-
-//   return;
-// };
-
 const addTopic = async (subjectId, topic) => {
   const isTopicAdded = await Subject.isTopicTaken(subjectId, topic);
 
   if (isTopicAdded)
     throw new ApiError(httpStatus.CONFLICT, "Topic is already added");
 
-  // console.log("topic", topic);
-  // await Subject.updateOne({ _id: subjectId }, { $push: { topics: topic } })
-
   return;
-};
-
-const notValidMongoID = () => {
-  throw new ApiError(httpStatus.NOT_FOUND, "Enter valid mongo-id");
 };
 
 const getSubjectById = async (subjectId) => {
   const resp = await Subject.findById(subjectId);
 
-  if (!resp) notValidMongoID();
+  if (!resp) SubjectNotFoundErr();
   return resp;
 };
 
@@ -54,7 +39,7 @@ const updateSubjectById = async (subjectId, updatedBody) => {
     { ...updatedBody }
   );
 
-  if (!resp) notValidMongoID();
+  if (!resp) SubjectNotFoundErr();
 
   return resp;
 };
@@ -62,13 +47,13 @@ const updateSubjectById = async (subjectId, updatedBody) => {
 const deleteSubjectById = async (subjectId) => {
   const subject = await Subject.findOne({ _id: subjectId });
 
-  if (!subject) notValidMongoID();
+  if (!subject) SubjectNotFoundErr();
 
   await Topic.deleteMany({ subject: subjectId });
 
   const resp = await Subject.deleteOne({ _id: subjectId });
 
-  if (!resp) notValidMongoID();
+  if (!resp) SubjectNotFoundErr();
 
   return resp;
 };

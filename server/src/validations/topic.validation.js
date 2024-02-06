@@ -11,8 +11,15 @@ const addNewTopic = {
   }),
 };
 
-const getTopicById = Joi.object().keys({
-  params: paramsIdValidtion,
-});
+const getTopicById = {
+  params: Joi.object().keys({
+    topic_id: paramsIdValidtion,
+  }),
+};
+const updateTopicById = {
+  body: Joi.object().keys({
+    name: Joi.string().required(),
+  }),
+};
 
-module.exports = { addNewTopic ,getTopicById};
+module.exports = { addNewTopic, getTopicById, updateTopicById };

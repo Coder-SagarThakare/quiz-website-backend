@@ -14,19 +14,23 @@ router
   .post(validate(subjectValidation.addNewSubject), subjectController.addNewSubject);
 
 // get ,delete subject
-router.route('/subject/:subject_id')
+router
+  .route('/subject/:subject_id')
   .get(validate(subjectValidation.getSubjectById), subjectController.getSubjectById)
   .patch(validate(subjectValidation.updateSubjectById), subjectController.updateSubjectById)
   .delete(validate(subjectValidation.deleteSubjectById), subjectController.deleteSubjectById)
 
 
 // add topics to perticular subject 
-router.route("/subject/:subject_id/add-topic")
+router
+  .route("/subject/:subject_id/add-topic")
   .post(validate(topicValidation.addNewTopic), topicController.addNewTopic)
 
-  // crud on topic
-  router.route("/subject/topic/:topic_id")
+  // get, on topic
+  router
+  .route("/subject/topic/:topic_id")
   .get(validate(topicValidation.getTopicById),topicController.getTopicById)
+  .patch(validate(topicValidation.updateTopicById), topicController.updateTopicById)
 
 
 module.exports = router;

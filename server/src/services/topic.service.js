@@ -2,13 +2,17 @@ const httpStatus = require("http-status");
 const { Topic, Subject } = require("../models");
 const ApiError = require("../utils/ApiError");
 
+const topicNotFoundErr = () => {
+  throw new ApiError(httpStatus.NOT_FOUND, "Topic not found ");
+};
+
 const addNewTopic = async (subjectId, body) => {
   var payload = { ...body };
 
   const isValidSubjectId = await Subject.findOne({ _id: subjectId });
 
   if (!isValidSubjectId)
-    throw new ApiError(httpStatus.NOT_FOUND, "Enter valid mongo id");
+    throw new ApiError(httpStatus.NOT_FOUND, "Subject not found");
 
   const isAlreadyAdded = await Topic.findOne({
     subject: subjectId,
@@ -31,10 +35,17 @@ const addNewTopic = async (subjectId, body) => {
 const getTopicById = async (topicId) => {
   const topic = await Topic.findOne({ _id: topicId });
 
-  if (!topic) 
-    throw new ApiError(httpStatus.NOT_FOUND, "Enter valid Mongo id");
+  if (!topic) topicNotFoundErr();
 
   return topic;
 };
 
-module.exports = { addNewTopic, getTopicById };
+const updateTopicById = async (topicId, updatedBody) => {
+  const resp = await Topic.updateOne({ _id: topicId }, updatedBody);
+
+  if (resp.modifiedCount < 1) topicNotFoundErr();
+
+  return true;
+};
+
+module.exports = { addNewTopic, getTopicById, updateTopicById };

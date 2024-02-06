@@ -16,4 +16,11 @@ const getTopicById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(topic);
 });
 
-module.exports = { addNewTopic, getTopicById };
+const updateTopicById = catchAsync(async (req, res) => {
+  req.body.name = req.body.name.toLowerCase();
+  await topicService.updateTopicById(req.params.topic_id, req.body);
+
+  res.status(httpStatus.OK).send({ message: "Topic updated successfully" });
+});
+
+module.exports = { addNewTopic, getTopicById, updateTopicById };
