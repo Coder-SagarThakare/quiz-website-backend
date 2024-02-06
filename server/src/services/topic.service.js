@@ -48,4 +48,18 @@ const updateTopicById = async (topicId, updatedBody) => {
   return true;
 };
 
-module.exports = { addNewTopic, getTopicById, updateTopicById };
+const deleteTopicById = async (topicId) => {
+  const resp = await Topic.deleteOne({ _id: topicId });
+
+
+  if (resp.deletedCount < 1) topicNotFoundErr();
+
+  return true;
+};
+
+module.exports = {
+  addNewTopic,
+  getTopicById,
+  updateTopicById,
+  deleteTopicById,
+};

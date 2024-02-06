@@ -31,6 +31,7 @@ router
   .route("/subject/topic/:topic_id")
   .get(validate(topicValidation.getTopicById),topicController.getTopicById)
   .patch(validate(topicValidation.updateTopicById), topicController.updateTopicById)
+  .delete(validate(topicValidation.deleteTopicById),topicController.deleteTopicById)
 
 
 module.exports = router;

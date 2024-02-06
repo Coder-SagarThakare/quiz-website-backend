@@ -25,4 +25,15 @@ const updateTopicById = {
   }),
 };
 
-module.exports = { addNewTopic, getTopicById, updateTopicById };
+const deleteTopicById = {
+  params: Joi.object().keys({
+    topic_id: paramsIdValidtion,
+  }),
+};
+
+module.exports = {
+  addNewTopic,
+  getTopicById,
+  updateTopicById,
+  deleteTopicById,
+};

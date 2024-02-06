@@ -23,4 +23,14 @@ const updateTopicById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ message: "Topic updated successfully" });
 });
 
-module.exports = { addNewTopic, getTopicById, updateTopicById };
+const deleteTopicById = catchAsync(async (req, res) => {
+  await topicService.deleteTopicById(req.params.topic_id);
+  res.status(httpStatus.OK).send({ message: "Topic deleted successfully" });
+});
+
+module.exports = {
+  addNewTopic,
+  getTopicById,
+  updateTopicById,
+  deleteTopicById,
+};
