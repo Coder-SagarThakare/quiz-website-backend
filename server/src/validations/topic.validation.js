@@ -20,6 +20,9 @@ const updateTopicById = {
   body: Joi.object().keys({
     name: Joi.string().required(),
   }),
+  params: Joi.object().keys({
+    topic_id: paramsIdValidtion,
+  }),
 };
 
 module.exports = { addNewTopic, getTopicById, updateTopicById };
