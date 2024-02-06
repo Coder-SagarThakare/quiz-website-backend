@@ -10,4 +10,10 @@ const addNewTopic = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ message: "Topic added successfully" });
 });
 
-module.exports = { addNewTopic };
+const getTopicById = catchAsync(async (req, res) => {
+  const topic = await topicService.getTopicById(req.params.topic_id);
+
+  res.status(httpStatus.OK).send(topic);
+});
+
+module.exports = { addNewTopic, getTopicById };

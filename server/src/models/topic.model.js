@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const objectId = mongoose.Schema.Types.ObjectId;
+const {private} = require("./plugins");
 
 const topicSchema = mongoose.Schema(
   {
@@ -13,9 +14,11 @@ const topicSchema = mongoose.Schema(
     },
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
+
+topicSchema.plugin(private);
 
 const Topic = mongoose.model("topic", topicSchema);
 

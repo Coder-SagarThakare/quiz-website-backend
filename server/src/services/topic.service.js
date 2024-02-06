@@ -28,4 +28,13 @@ const addNewTopic = async (subjectId, body) => {
   return true;
 };
 
-module.exports = { addNewTopic };
+const getTopicById = async (topicId) => {
+  const topic = await Topic.findOne({ _id: topicId });
+
+  if (!topic) 
+    throw new ApiError(httpStatus.NOT_FOUND, "Enter valid Mongo id");
+
+  return topic;
+};
+
+module.exports = { addNewTopic, getTopicById };

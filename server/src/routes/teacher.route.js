@@ -24,8 +24,9 @@ router.route('/subject/:subject_id')
 router.route("/subject/:subject_id/add-topic")
   .post(validate(topicValidation.addNewTopic), topicController.addNewTopic)
 
+  // crud on topic
   router.route("/subject/topic/:topic_id")
-  .get(validate(topicValidation.getTopicById),(req,res)=>{res.send('dsdsds')})
+  .get(validate(topicValidation.getTopicById),topicController.getTopicById)
 
 
 module.exports = router;
