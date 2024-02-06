@@ -1,5 +1,5 @@
 const httpStatus = require("http-status");
-const { Subject } = require("../models");
+const { Subject, Topic } = require("../models");
 const ApiError = require("../utils/ApiError");
 
 const addNewSubject = async (body) => {
@@ -29,7 +29,7 @@ const addTopic = async (subjectId, topic) => {
   const isTopicAdded = await Subject.isTopicTaken(subjectId, topic);
 
   if (isTopicAdded)
-    throw new ApiError(httpStatus.CONFLICT, "Topic is already added")
+    throw new ApiError(httpStatus.CONFLICT, "Topic is already added");
 
   // console.log("topic", topic);
   // await Subject.updateOne({ _id: subjectId }, { $push: { topics: topic } })
@@ -37,32 +37,46 @@ const addTopic = async (subjectId, topic) => {
   return;
 };
 
-const notValidMongoID = () => { throw new ApiError(httpStatus.NOT_FOUND, "Enter valid mongo-id") }
+const notValidMongoID = () => {
+  throw new ApiError(httpStatus.NOT_FOUND, "Enter valid mongo-id");
+};
 
 const getSubjectById = async (subjectId) => {
-  const resp = await Subject.findById(subjectId)
+  const resp = await Subject.findById(subjectId);
 
-  if (!resp)
-    notValidMongoID()
+  if (!resp) notValidMongoID();
   return resp;
-}
+};
 
 const updateSubjectById = async (subjectId, updatedBody) => {
-  console.log(subjectId, updatedBody);
-  const resp = await Subject.findOneAndUpdate({ _id: subjectId }, { ...updatedBody })
+  const resp = await Subject.findOneAndUpdate(
+    { _id: subjectId },
+    { ...updatedBody }
+  );
 
-  if (!resp)
-    notValidMongoID()
+  if (!resp) notValidMongoID();
 
   return resp;
-}
+};
 
 const deleteSubjectById = async (subjectId) => {
-  const resp = await Subject.deleteOne({ _id: subjectId })
+  const subject = await Subject.findOne({ _id: subjectId });
 
-  if (!resp)
-    notValidMongoID()
+  if (!subject) notValidMongoID();
+
+  await Topic.deleteMany({ subject: subjectId });
+
+  const resp = await Subject.deleteOne({ _id: subjectId });
+
+  if (!resp) notValidMongoID();
+
   return resp;
-}
+};
 
-module.exports = { addNewSubject, addTopic, getSubjectById, updateSubjectById, deleteSubjectById };
+module.exports = {
+  addNewSubject,
+  addTopic,
+  getSubjectById,
+  updateSubjectById,
+  deleteSubjectById,
+};
