@@ -8,9 +8,6 @@ const router = require("express").Router();
 // route.use(auth())
 
 
-// to add new stream
-router.route("/add-stream").post(validate(streamValidation.addStream), streamController.addStream)
-
 // to add a new subject
 router
   .route("/add-subject")

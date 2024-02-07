@@ -1,9 +1,18 @@
 const Joi = require("joi");
+const { objectId } = require("./custom.validation");
 
 const addStream = {
-    body : Joi.object().keys({
-        name : Joi.string().required()
-    }).required()
-}
+  body: Joi.object()
+    .keys({
+      name: Joi.string().required(),
+    })
+    .required(),
+};
 
-module.exports = {addStream}
+const getStreamById = {
+  params: Joi.object().keys({
+    stream_id: Joi.string().required().custom(objectId),
+  }),
+};
+
+module.exports = { addStream, getStreamById };
