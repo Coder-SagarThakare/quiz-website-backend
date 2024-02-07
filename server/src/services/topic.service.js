@@ -16,8 +16,12 @@ const addNewTopic = async (subjectId, body) => {
 
   const isAlreadyAdded = await Topic.findOne({
     subject: subjectId,
-    name: payload.name,
+    name: payload.name,   // This value will be converted to lowercase before the query
   });
+
+
+  console.log(isAlreadyAdded);
+  console.log(payload.name);
 
   if (isAlreadyAdded)
     throw new ApiError(

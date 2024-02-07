@@ -39,7 +39,7 @@ const getSubjectById = catchAsync(async (req, res) => {
 })
 
 const updateSubjectById = catchAsync(async (req, res) => {
-  req.body.name = req.body.name.toUpperCase();
+  // req.body.name = req.body.name.toUpperCase();
   await subjectService.updateSubjectById(req.params.subject_id, req.body)
   res.status(httpStatus.OK).send({ message: "Subject updated successfully" })
 })

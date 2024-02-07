@@ -26,12 +26,16 @@ router
   .route("/subject/:subject_id/add-topic")
   .post(validate(topicValidation.addNewTopic), topicController.addNewTopic)
 
-  // get, on topic
+  // get,update,delete on topic
+  
   router
   .route("/subject/topic/:topic_id")
   .get(validate(topicValidation.getTopicById),topicController.getTopicById)
   .patch(validate(topicValidation.updateTopicById), topicController.updateTopicById)
   .delete(validate(topicValidation.deleteTopicById),topicController.deleteTopicById)
+
+  // add question to perticular topic 
+  router.route("/topic/:topic_id/add-question").post()
 
 
 module.exports = router;
