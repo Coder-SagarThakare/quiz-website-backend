@@ -3,7 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const { userService } = require("../services");
 
 const getUser = catchAsync(async (req, res) => {
-  res.status(httpStatus.OK).send(req.user);
+  res.status(httpStatus.OK).send(req.user); 
 });
 
 const updateUser = catchAsync(async (req, res) => {
