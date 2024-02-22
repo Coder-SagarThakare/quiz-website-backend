@@ -36,6 +36,10 @@ if (config.env == "production") {
 // Define routes index in separate file.
 app.use("/", routes);
 
+app.get("/test",(req,res)=>{
+  return res.status(200).send("<h1>Test Works!</h1>")
+})
+
 // Send back a 404 error for any unknown api request
 app.use('*',(req, res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, `${req.baseUrl} URL NOT FOUND `));
