@@ -3,10 +3,11 @@ const { streamService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 
 const addStream = catchAsync(async (req, res) => {
-  const stream = await streamService.addStream(req.body);
+  const stream = await streamService.addStream(req.body,req.file);
+  
   res
     .status(httpStatus.CREATED)
-    .send({ message: ` ${stream} Stream added successfully` });
+    .send({ message: `${stream} Stream added successfully` });
 });
 
 const getStreamById = catchAsync(async (req, res) => {
