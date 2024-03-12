@@ -17,10 +17,7 @@ const addStream = async (body, file) => {
     );
 
   const result = await uploadFileToCloudinary(file.path)
-  console.log(result);
   body.bgImage = result.secure_url;
-
-  console.log("body : ", body);
   const stream = await Stream.create(body);
   return stream.name;
 };

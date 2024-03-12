@@ -1,13 +1,14 @@
 const httpStatus = require("http-status");
 const ApiError = require("../utils/ApiError");
+const config = require("../config/config");
 
 const cloudinary = require("cloudinary").v2;
 
        
 cloudinary.config({ 
-  cloud_name: 'difupvzin', 
-  api_key: '481521776181986', 
-  api_secret: 'UZHHf60EpS0xCdw3DQ2mDcPTNXQ' 
+  cloud_name: config.cloudinary.cloud_name, 
+  api_key: config.cloudinary.api_key, 
+  api_secret: config.cloudinary.api_secret 
 });
 
 const uploadFileToCloudinary = async (file) => {

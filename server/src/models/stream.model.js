@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const objectId = mongoose.Schema.Types.ObjectId;
+
 const streamSchema = mongoose.Schema(
   {
     name: {
@@ -13,6 +15,10 @@ const streamSchema = mongoose.Schema(
       default:
         "https://res.cloudinary.com/difupvzin/image/upload/v1707290825/bgimage-stream.png",
     },
+    createdBy: {
+      type: objectId,
+      require: true
+    }
   },
   {
     timestamps: true,

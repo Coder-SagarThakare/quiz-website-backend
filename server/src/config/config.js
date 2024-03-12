@@ -38,6 +38,11 @@ module.exports = {
       envVars.JWT_RESET_PASSWORD_EXPIRATION_MINUTES,
     verifyEmailExpirationMinutes: envVars.JWT_VERIFY_EMAIL_EXPIRATION_MINUTES,
   },
+  cloudinary : {
+    cloud_name : envVars.CLOUDINARY_CLOUD_NAME,
+    api_key : envVars.CLOUDINARY_API_KEY,
+    api_secret : envVars.CLOUDINARY_API_SECRET
+  },
   mongoose: {
     url: envVars.MONGODB_URL + (envVars.NODE_ENV === "test" ? "-test" : ""),
     /**
