@@ -7,7 +7,7 @@ const streamSchema = mongoose.Schema(
       required: true,
       set: (value) => value.toUpperCase(),
     },
-    bg_image: {
+    bgImage: {
       type: String,
       required: true,
       default:

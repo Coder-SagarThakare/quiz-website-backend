@@ -1,13 +1,13 @@
 const httpStatus = require("http-status");
 const { Stream } = require("../models");
 const ApiError = require("../utils/ApiError");
-const {uploadFileToCloudinary} = require("./cloudinary.service")
+const { uploadFileToCloudinary } = require("./cloudinary.service")
 
 const streamNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Stream not found");
 };
 
-const addStream = async (body,file) => {
+const addStream = async (body, file) => {
   const isStreamAdded = await Stream.findOne({ name: body.name });
 
   if (isStreamAdded)
@@ -16,8 +16,11 @@ const addStream = async (body,file) => {
       `${body.name} Stream already exist`
     );
 
-  const result = await uploadFileToCloudinary(file)
+  const result = await uploadFileToCloudinary(file.path)
   console.log(result);
+  body.bgImage = result.secure_url;
+
+  console.log("body : ", body);
   const stream = await Stream.create(body);
   return stream.name;
 };
