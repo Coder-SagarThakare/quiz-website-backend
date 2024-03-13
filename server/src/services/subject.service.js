@@ -51,7 +51,7 @@ const deleteSubjectById = async (subjectId) => {
 
   await Topic.deleteMany({ subject: subjectId });
 
-  const resp = await Subject.deleteOne({ _id: subjectId });
+  const resp = await Subject.deleteOne({ _id: subjectId }); 
 
   if (!resp) SubjectNotFoundErr();
 

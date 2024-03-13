@@ -1,7 +1,10 @@
 const httpStatus = require("http-status");
 const { Stream } = require("../models");
 const ApiError = require("../utils/ApiError");
-const { uploadFileToCloudinary } = require("./cloudinary.service")
+const {
+  uploadFileToCloudinary,
+  deleteFileFromCloudinary,
+} = require("./cloudinary.service");
 
 const streamNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Stream not found");
@@ -16,7 +19,10 @@ const addStream = async (body, file) => {
       `${body.name} Stream already exist`
     );
 
-  const result = await uploadFileToCloudinary(file.path,"stream_bgImages")
+  const result = await uploadFileToCloudinary(
+    file.path,
+    "QuizEasy/stream_bgImages"
+  );
   body.bgImage = result.secure_url;
   body.publicId = result.public_id;
   const stream = await Stream.create(body);
@@ -31,4 +37,20 @@ const getStreamById = async (streamId) => {
   return resp;
 };
 
-module.exports = { addStream, getStreamById };
+const deleteStreamById = async (streamId) => {
+  const stream = await Stream.findOne({ _id: streamId });
+
+  if (!stream) streamNotFoundErr();
+
+  console.log("stream",stream);
+
+  await deleteFileFromCloudinary(stream.publicId);
+
+  const resp = await Stream.deleteOne({ _id: streamId });
+
+  if (resp.deletedCount < 1) streamNotFoundErr();
+
+  return;
+};
+
+module.exports = { addStream, getStreamById, deleteStreamById };

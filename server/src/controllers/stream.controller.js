@@ -5,9 +5,9 @@ const catchAsync = require("../utils/catchAsync");
 const addStream = catchAsync(async (req, res) => {
   // add createdBY in req.body
   // req.body.createdBy = req.user._id;
-  
-  const stream = await streamService.addStream(req.body,req.file);
-  
+
+  const stream = await streamService.addStream(req.body, req.file);
+
   res
     .status(httpStatus.CREATED)
     .send({ message: `${stream} Stream added successfully` });
@@ -18,4 +18,9 @@ const getStreamById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(resp);
 });
 
-module.exports = { addStream, getStreamById };
+const deleteStreamById = catchAsync(async (req, res) => {
+  await streamService.deleteStreamById(req.params.stream_id);
+  res.status(httpStatus.OK).send({ message: "Stream deleted Successfully" });
+});
+
+module.exports = { addStream, getStreamById, deleteStreamById };

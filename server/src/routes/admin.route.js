@@ -16,5 +16,7 @@ router
 router
   .route('/stream/:stream_id')
   .get(streamController.getStreamById)
+  .delete(streamController.deleteStreamById)
+
 
 module.exports = router;

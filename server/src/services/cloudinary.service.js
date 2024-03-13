@@ -10,7 +10,7 @@ cloudinary.config({
   api_secret: config.cloudinary.api_secret,
 });
 
-const uploadFileToCloudinary = async (file, folderName = "quizEasy") => {
+const uploadFileToCloudinary = async (file, folderName = "QuizEasy") => {
   try {
     const result = await cloudinary.uploader.upload(file, {
       folder: folderName,
@@ -26,4 +26,17 @@ const uploadFileToCloudinary = async (file, folderName = "quizEasy") => {
   }
 };
 
-module.exports = { uploadFileToCloudinary };
+const deleteFileFromCloudinary = async (publicId) => {
+  try {
+    const result =await  cloudinary.uploader.destroy(publicId);
+
+    console.log("cloudinary result" ,result);
+  } catch (e) {
+    console.log("cloudinary error",e);
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      "Error while deleting image"
+    );
+  }
+};
+module.exports = { uploadFileToCloudinary ,deleteFileFromCloudinary};

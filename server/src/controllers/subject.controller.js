@@ -46,8 +46,6 @@ const updateSubjectById = catchAsync(async (req, res) => {
 
 const deleteSubjectById = catchAsync(async (req, res) => {
 
-
-
   await subjectService.deleteSubjectById(req.params.subject_id)
 
   res.status(httpStatus.OK).send({ message: "Subject deleted successfully !!!" })
