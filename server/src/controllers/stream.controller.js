@@ -18,9 +18,14 @@ const getStreamById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(resp);
 });
 
+const updateStreamById = catchAsync(async (req, res) => {
+  const resp = await streamService.updateStreamById(req.params.stream_id, req.body)
+  res.status(httpStatus.OK).send({ message: "Stream updated successfully" })
+})
+
 const deleteStreamById = catchAsync(async (req, res) => {
   await streamService.deleteStreamById(req.params.stream_id);
   res.status(httpStatus.OK).send({ message: "Stream deleted Successfully" });
 });
 
-module.exports = { addStream, getStreamById, deleteStreamById };
+module.exports = { addStream, getStreamById, deleteStreamById, updateStreamById };

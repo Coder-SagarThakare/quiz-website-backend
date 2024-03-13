@@ -23,8 +23,10 @@ const addStream = async (body, file) => {
     file.path,
     "QuizEasy/stream_bgImages"
   );
+
   body.bgImage = result.secure_url;
   body.publicId = result.public_id;
+
   const stream = await Stream.create(body);
   return stream.name;
 };
@@ -37,12 +39,23 @@ const getStreamById = async (streamId) => {
   return resp;
 };
 
+const updateStreamById = async (streamId, updatedBody) => {
+  const stream = await Stream.findOneAndUpdate(
+    { _id: streamId },
+    { ...updatedBody }
+  )
+
+  if (!stream) streamNotFoundErr();
+    
+  return stream;
+}
+
 const deleteStreamById = async (streamId) => {
   const stream = await Stream.findOne({ _id: streamId });
 
   if (!stream) streamNotFoundErr();
 
-  console.log("stream",stream);
+  console.log("stream", stream);
 
   await deleteFileFromCloudinary(stream.publicId);
 
@@ -53,4 +66,4 @@ const deleteStreamById = async (streamId) => {
   return;
 };
 
-module.exports = { addStream, getStreamById, deleteStreamById };
+module.exports = { addStream, getStreamById, deleteStreamById, updateStreamById };

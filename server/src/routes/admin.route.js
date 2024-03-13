@@ -12,13 +12,14 @@ router.use(auth('admin'))
 // to add new stream
 router
   .route("/add-stream")
-  .post( upload.single('stream_img'),validate(streamValidation.addStream), streamController.addStream);
+  .post(upload.single('stream_img'), validate(streamValidation.addStream), streamController.addStream);
 
 // get update delete stream
 router
   .route('/stream/:stream_id')
-  .get(streamController.getStreamById)
-  .delete(streamController.deleteStreamById)
+  .get(streamController.getStreamById)        // add joi validations
+  .patch(streamController.updateStreamById)   // add validations
+  .delete(streamController.deleteStreamById)  // add validations
 
 
 module.exports = router;
