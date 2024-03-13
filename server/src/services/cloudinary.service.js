@@ -9,7 +9,7 @@ cloudinary.config({
   api_key: config.cloudinary.api_key,
   api_secret: config.cloudinary.api_secret,
 });
-
+  
 const uploadFileToCloudinary = async (file, folderName = "QuizEasy") => {
   try {
     const result = await cloudinary.uploader.upload(file, {
@@ -39,4 +39,5 @@ const deleteFileFromCloudinary = async (publicId) => {
     );
   }
 };
+
 module.exports = { uploadFileToCloudinary ,deleteFileFromCloudinary};

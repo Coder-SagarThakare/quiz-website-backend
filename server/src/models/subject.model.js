@@ -10,6 +10,10 @@ const subjectSchema = mongoose.Schema(
       required: true,
       set: (value) => value.toUpperCase(),
     },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
+    },
   },
   { timestamps: true }
 );
