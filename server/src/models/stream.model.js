@@ -21,7 +21,7 @@ const streamSchema = mongoose.Schema(
     },
     createdBy: {
       type: objectId,
-      require: true
+      required: true
     },
   },
   {

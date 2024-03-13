@@ -35,7 +35,7 @@ const deleteFileFromCloudinary = async (publicId) => {
     console.log("cloudinary error",e);
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      "Error while deleting image"
+      e.message
     );
   }
 };

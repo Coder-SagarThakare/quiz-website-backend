@@ -4,7 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 
 const addStream = catchAsync(async (req, res) => {
   // add createdBY in req.body
-  // req.body.createdBy = req.user._id;
+  req.body.createdBy = req.user._id;
 
   const stream = await streamService.addStream(req.body, req.file);
 
