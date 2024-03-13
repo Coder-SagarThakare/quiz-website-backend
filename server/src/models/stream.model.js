@@ -9,6 +9,10 @@ const streamSchema = mongoose.Schema(
       required: true,
       set: (value) => value.toUpperCase(),
     },
+    publicId : {
+      type : String,
+      required : true
+    },
     bgImage: {
       type: String,
       required: true,
@@ -18,7 +22,7 @@ const streamSchema = mongoose.Schema(
     createdBy: {
       type: objectId,
       require: true
-    }
+    },
   },
   {
     timestamps: true,

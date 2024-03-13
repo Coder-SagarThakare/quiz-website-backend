@@ -16,8 +16,9 @@ const addStream = async (body, file) => {
       `${body.name} Stream already exist`
     );
 
-  const result = await uploadFileToCloudinary(file.path)
+  const result = await uploadFileToCloudinary(file.path,"stream_bgImages")
   body.bgImage = result.secure_url;
+  body.publicId = result.public_id;
   const stream = await Stream.create(body);
   return stream.name;
 };
