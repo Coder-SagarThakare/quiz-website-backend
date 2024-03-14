@@ -10,25 +10,28 @@ const streamNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Stream not found");
 };
 
-const addStream = async (body, file) => {
-  const isStreamAdded = await Stream.findOne({ name: body.name });
+// folder name on cloudinary server to save our stream background images
+const targetedFolder = "QuizEasy/stream_bgImages"
 
-  if (isStreamAdded)
+const addStream = async (body, file) => {
+  const stream = await Stream.findOne({ name: body.name });
+
+  if (stream)
     throw new ApiError(
       httpStatus.NOT_FOUND,
-      `${body.name} Stream already exist`
+      `${stream.name} Stream already exist`
     );
 
   const result = await uploadFileToCloudinary(
     file.path,
-    "QuizEasy/stream_bgImages"
+    targetedFolder
   );
 
   body.bgImage = result.secure_url;
   body.publicId = result.public_id;
 
-  const stream = await Stream.create(body);
-  return stream.name;
+  const newStream = await Stream.create(body);
+  return newStream.name;
 };
 
 const getStreamById = async (streamId) => {
@@ -54,8 +57,6 @@ const deleteStreamById = async (streamId) => {
   const stream = await Stream.findOne({ _id: streamId });
 
   if (!stream) streamNotFoundErr();
-
-  console.log("stream", stream);
 
   await deleteFileFromCloudinary(stream.publicId);
 

@@ -1,18 +1,37 @@
 const Joi = require("joi");
 const { objectId } = require("./custom.validation");
 
+const paramsValidation = Joi.object().keys({
+  streamId: Joi.string().required().custom(objectId),
+});
+const nameValidation = Joi.string().required();
+
 const addStream = {
   body: Joi.object()
     .keys({
-      name: Joi.string().required(),
+      name: nameValidation,
     })
     .required(),
 };
 
 const getStreamById = {
-  params: Joi.object().keys({
-    streamId: Joi.string().required().custom(objectId),
+  params: paramsValidation,
+};
+
+const updateStreamById = {
+  params: paramsValidation,
+  body: Joi.object().keys({
+    name: nameValidation,
   }),
 };
 
-module.exports = { addStream, getStreamById };
+const deleteStreamById = {
+  params: paramsValidation,
+};
+
+module.exports = {
+  addStream,
+  getStreamById,
+  updateStreamById,
+  deleteStreamById,
+};
