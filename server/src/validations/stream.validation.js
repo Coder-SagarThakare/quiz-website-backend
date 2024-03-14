@@ -11,7 +11,7 @@ const addStream = {
 
 const getStreamById = {
   params: Joi.object().keys({
-    stream_id: Joi.string().required().custom(objectId),
+    streamId: Joi.string().required().custom(objectId),
   }),
 };
 

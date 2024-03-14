@@ -43,12 +43,12 @@ const updateStreamById = async (streamId, updatedBody) => {
   const stream = await Stream.findOneAndUpdate(
     { _id: streamId },
     { ...updatedBody }
-  )
+  );
 
   if (!stream) streamNotFoundErr();
-    
+
   return stream;
-}
+};
 
 const deleteStreamById = async (streamId) => {
   const stream = await Stream.findOne({ _id: streamId });
@@ -66,4 +66,9 @@ const deleteStreamById = async (streamId) => {
   return;
 };
 
-module.exports = { addStream, getStreamById, deleteStreamById, updateStreamById };
+module.exports = {
+  addStream,
+  getStreamById,
+  deleteStreamById,
+  updateStreamById,
+};

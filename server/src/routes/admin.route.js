@@ -16,7 +16,7 @@ router
 
 // get update delete stream
 router
-  .route('/stream/:stream_id')
+  .route('/stream/:streamId')
   .get(streamController.getStreamById)        // add joi validations
   .patch(streamController.updateStreamById)   // add validations
   .delete(streamController.deleteStreamById)  // add validations
