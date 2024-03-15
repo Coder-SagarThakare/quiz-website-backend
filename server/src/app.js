@@ -34,7 +34,7 @@ if (config.env == "production") {
 }
 
 // Define routes index in separate file.
-app.use("/", routes);
+app.use("/api/v1", routes);
 
 app.get("/test",(req,res)=>{
   return res.status(200).send("<h1>Test Works!</h1>")

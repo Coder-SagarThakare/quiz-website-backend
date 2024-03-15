@@ -55,7 +55,7 @@ const teacherSchema = mongoose.Schema(
     },
     isDeleted: {
       type: Boolean,
-      default: undefined,
+      default: false,
     },
     isPasswordUpdated: {
       type: Boolean,
@@ -99,6 +99,7 @@ const teacherSchema = mongoose.Schema(
     birthDate:  Date,
     linkedIn: String,
     github: String,
+    summary : String
   },
   { timestamps: true }
 );

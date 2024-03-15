@@ -12,13 +12,13 @@ router.get("/", (req, res) => {
 });
 
 router.post(
-  "/register",
+  "/student/register",
   [captcha.verify, validate(authValidation.register)],
   authController.register
 );
 
 router.post(
-  "/login",
+  "/student/login",
   [captcha.verify, validate(authValidation.login)],
   authController.login
 );

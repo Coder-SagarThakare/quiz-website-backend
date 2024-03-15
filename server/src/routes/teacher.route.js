@@ -5,7 +5,7 @@ const auth = require("../middlewares/auth");
 
 const router = require("express").Router();
 
-
+router.post('/register', )
 
 
 // authenticate user has rights of teacher or not ?
