@@ -14,7 +14,7 @@ router
   .route("/add-stream")
   .post(upload.single('streamImg'), validate(streamValidation.addStream), streamController.addStream);
 
-// get update delete stream
+// get, update, delete stream
 router
   .route('/stream/:streamId')
   .get(validate(streamValidation.getStreamById),streamController.getStreamById)

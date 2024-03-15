@@ -1,16 +1,16 @@
 const { subjectController, topicController, streamController } = require("../controllers");
 const validate = require("../middlewares/validate");
 const { subjectValidation, topicValidation, streamValidation } = require("../validations");
+const auth = require("../middlewares/auth");
 
 const router = require("express").Router();
 
-// use middleware for authorise teacher
-// route.use(auth())
-
+// authenticate user has rights of teacher or not ?
+router.use(auth('teacher'))
 
 // to add a new subject
 router
-  .route("/add-subject")
+  .route("/:streamId/add-subject")
   .post(validate(subjectValidation.addNewSubject), subjectController.addNewSubject);
 
 // get ,delete subject
