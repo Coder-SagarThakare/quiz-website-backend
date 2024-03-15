@@ -5,6 +5,9 @@ const auth = require("../middlewares/auth");
 
 const router = require("express").Router();
 
+
+
+
 // authenticate user has rights of teacher or not ?
 router.use(auth('teacher'))
 
