@@ -4,6 +4,7 @@ const validator = require("validator");
 
 const teacherSchema = mongoose.Schema(
   {
+    // ------------- personal details
     name: {
       type: String,
       required: true,
@@ -49,6 +50,48 @@ const teacherSchema = mongoose.Schema(
       type: String,
       default: "https://i.imgur.com/CR1iy7U.png",
     },
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+      required: true,
+    },
+    bio : {
+      type :String,
+      default : "Hey, I am using QuizEazy..."
+    },
+    birthDate : Date,
+
+    // ---------- organizational details 
+    organization: {
+      type: String,
+      required: true,
+    },
+    highestEducation: {
+      type: String,
+      required: true,
+    },
+    // college id proof for confirmation
+    collegeId: {
+      type: String,
+      required: true,
+    },
+    // will used for storing image in cloudinary
+    publicId: {
+      type: String,
+      required: true,
+    },
+    specialization: {
+      type: String,
+      required: true,
+    },
+    teachingExperience: String,
+
+    // ----------- social
+    linkedIn: String,
+    github: String,    
+
+    // ----------- database related info
+
     isEmailVerified: {
       type: Boolean,
       default: false,
@@ -65,41 +108,15 @@ const teacherSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    gender: {
-      type: String,
-      enum: ["male", "female", "other"],
-      required: true,
-    },
+
     otp: {
       type: Number,
       default: undefined,
     },
     otpGeneratedTime: { type: String, default: undefined },
-    organization: {
-      type: String,
-      required: true,
-    },
-    highestEducation: {
-      type: String,
-      required: true,
-    },
-    collegeId: {
-      type: String,
-      required: true,
-    },
-    publicId: {
-      type: String,
-      required: true,
-    },
-    specialization: {
-      type: String,
-      required: true,
-    },
-    teachingExperience: String,
-    birthDate:  Date,
-    linkedIn: String,
-    github: String,
-    summary : String
+  
+    // birthDate:  Date,
+
   },
   { timestamps: true }
 );
