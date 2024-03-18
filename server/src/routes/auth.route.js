@@ -4,6 +4,7 @@ const auth = require("../middlewares/auth");
 const captcha = require("../middlewares/captcha");
 const validate = require("../middlewares/validate");
 const { authValidation, teacherValidation } = require("../validations");
+const { upload } = require("../middlewares/multer");
 
 const router = require("express").Router();
 
@@ -25,7 +26,8 @@ router.post(
 
 router.post(
   "/teacher/register",
-  // validate(teacherValidation.registerTeacher),
+  upload.single() ,
+  validate(teacherValidation.registerTeacher),
   teacherController.registerTeacher
 );
 

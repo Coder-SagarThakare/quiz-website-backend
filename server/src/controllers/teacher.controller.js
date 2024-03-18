@@ -4,7 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 
 const registerTeacher = catchAsync(async (req, res) => {
   await teacherService.registerTeacher({ ...req.body });
-  res.status(httpStatus.CREATED).send("Registered sucessfully");
+  res.status(httpStatus.CREATED).send({message : "user registered sucessfully"});
 });
 
 module.exports = { registerTeacher };

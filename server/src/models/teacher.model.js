@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { private } = require("./plugins");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
+
 
 const teacherSchema = mongoose.Schema(
   {
@@ -60,6 +62,10 @@ const teacherSchema = mongoose.Schema(
       default : "Hey, I am using QuizEazy..."
     },
     birthDate : Date,
+    role: {
+      type: String,
+      default : "tecaher"
+    },
 
     // ---------- organizational details 
     organization: {
@@ -107,10 +113,6 @@ const teacherSchema = mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    role: {
-      type: String,
-      default : "tecaher"
-    },
     otp: {
       type: Number,
       default: undefined,
@@ -127,6 +129,14 @@ teacherSchema.statics.isEmailTaken = async function (email, excludeUserId) {
 
   return !!teacher;
 };
+
+teacherSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
 
 teacherSchema.plugin(private);
 
