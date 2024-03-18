@@ -71,20 +71,23 @@ const teacherSchema = mongoose.Schema(
       required: true,
     },
     // college id proof for confirmation
-    collegeId: {
+    collegeIdProof: {
       type: String,
-      required: true,
+      // required: true,
     },
     // will used for storing image in cloudinary
     publicId: {
       type: String,
-      required: true,
+      // required: true,
     },
     specialization: {
       type: String,
       required: true,
     },
-    teachingExperience: String,
+    teachingExperience: {
+      type : String,
+      default : 0
+    },
 
     // ----------- social
     linkedIn: String,
@@ -106,20 +109,24 @@ const teacherSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      required: true,
+      default : "tecaher"
     },
-
     otp: {
       type: Number,
       default: undefined,
     },
     otpGeneratedTime: { type: String, default: undefined },
-  
-    // birthDate:  Date,
 
   },
   { timestamps: true }
 );
+
+teacherSchema.statics.isEmailTaken = async function (email, excludeUserId) {
+  // this : represent Model { Teacher }
+  const teacher = await this.findOne({ email, _id: { $ne: excludeUserId } });
+
+  return !!teacher;
+};
 
 teacherSchema.plugin(private);
 

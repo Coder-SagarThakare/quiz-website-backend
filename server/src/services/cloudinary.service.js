@@ -28,7 +28,7 @@ const uploadFileToCloudinary = async (file, folderName = "QuizEasy") => {
 
 const deleteFileFromCloudinary = async (publicId) => {
   try {
-    const result =await  cloudinary.uploader.destroy(publicId);
+    const result =await cloudinary.uploader.destroy(publicId);
 
     console.log("cloudinary result" ,result);
   } catch (e) {

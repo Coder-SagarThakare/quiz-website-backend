@@ -1,9 +1,9 @@
 const logger = require("../config/logger");
-const { authController } = require("../controllers");
+const { authController, teacherController } = require("../controllers");
 const auth = require("../middlewares/auth");
 const captcha = require("../middlewares/captcha");
 const validate = require("../middlewares/validate");
-const { authValidation } = require("../validations");
+const { authValidation, teacherValidation } = require("../validations");
 
 const router = require("express").Router();
 
@@ -21,6 +21,12 @@ router.post(
   "/student/login",
   [captcha.verify, validate(authValidation.login)],
   authController.login
+);
+
+router.post(
+  "/teacher/register",
+  // validate(teacherValidation.registerTeacher),
+  teacherController.registerTeacher
 );
 
 router.post(
@@ -59,6 +65,10 @@ router.get(
   authController.sendVerificationOTP
 );
 
-router.post("/verify-otp", [validate(authValidation.verifyOTP), auth()], authController.verifyOTP);
+router.post(
+  "/verify-otp",
+  [validate(authValidation.verifyOTP), auth()],
+  authController.verifyOTP
+);
 
 module.exports = router;
