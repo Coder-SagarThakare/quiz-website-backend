@@ -10,7 +10,6 @@ const teacherSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
-      set: (value) => value.toUpperCase(),
     },
     email: {
       type: String,
@@ -43,7 +42,7 @@ const teacherSchema = mongoose.Schema(
       required: true,
       validate: {
         validator: function(value) {
-          return /^[0-9]{10}$/.test(value); // Assuming the mobile number should be 10 digits long
+          return /^[0-9]{10}$/.test(value); // mobile number should be 10 digits long
         },
         message: props => `${props.value} is not a valid mobile number!`
       }
@@ -79,12 +78,12 @@ const teacherSchema = mongoose.Schema(
     // college id proof for confirmation
     collegeIdProof: {
       type: String,
-      // required: true,
+      required: true,
     },
     // will used for storing image in cloudinary
     publicId: {
       type: String,
-      // required: true,
+      required: true,
     },
     specialization: {
       type: String,
@@ -102,6 +101,10 @@ const teacherSchema = mongoose.Schema(
     // ----------- database related info
 
     isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isTeacherVerified: {
       type: Boolean,
       default: false,
     },

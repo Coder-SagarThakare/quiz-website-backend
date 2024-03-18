@@ -21,7 +21,7 @@ const uploadFileToCloudinary = async (file, folderName = "QuizEasy") => {
     console.log(error);
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      "Error while uploading image"
+      error.message
     );
   }
 };

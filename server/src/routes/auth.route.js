@@ -24,9 +24,9 @@ router.post(
   authController.login
 );
 
-router.post(
+router.post(  
   "/teacher/register",
-  upload.single() ,
+  upload.single("collegeIdProof") ,
   validate(teacherValidation.registerTeacher),
   teacherController.registerTeacher
 );

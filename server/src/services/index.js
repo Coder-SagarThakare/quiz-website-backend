@@ -7,3 +7,4 @@ module.exports.subjectService = require("./subject.service");
 module.exports.topicService = require("./topic.service");
 module.exports.streamService = require("./stream.service");
 module.exports.teacherService = require("./teacher.service");
+module.exports.cloudinaryService = require("./cloudinary.service");
