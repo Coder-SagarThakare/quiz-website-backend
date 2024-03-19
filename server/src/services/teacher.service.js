@@ -2,6 +2,7 @@ const httpStatus = require("http-status");
 const { Teacher } = require("../models");
 const ApiError = require("../utils/ApiError");
 const { uploadFileToCloudinary } = require("./cloudinary.service");
+const { deleteLocalFile } = require("./file.service");
 
 const registerTeacher = async (userBody, file) => {
   try {
@@ -11,6 +12,8 @@ const registerTeacher = async (userBody, file) => {
     }
 
     const result = await uploadFileToCloudinary(file, `/QuizEazy/Teacher/CollegeIdProof/${userBody.email}`)
+
+    deleteLocalFile(file)
 
     userBody.publicId = result.public_id;
     userBody.collegeIdProof = result.secure_url;

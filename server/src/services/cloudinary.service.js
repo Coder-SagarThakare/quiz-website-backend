@@ -12,7 +12,6 @@ cloudinary.config({
   
 const uploadFileToCloudinary = async (file, folderName = "QuizEasy") => {
 
-  console.log(file);
   try {
     const result = await cloudinary.uploader.upload(file, {
       folder: folderName,
