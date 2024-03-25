@@ -25,4 +25,17 @@ const registerTeacher = async (userBody, file) => {
   }
 };
 
-module.exports = { registerTeacher };
+const getAllTeachers = async () => {
+  return await Teacher.find()
+}
+
+const verifyTeacher = async (teacherId) => {
+  const teacher = Teacher.findOne({ _id: teacherId })
+  console.log(teacher);
+  if (!teacher)
+    throw new ApiError(httpStatus.NOT_FOUND, "Teacher not found")
+
+  return teacher
+}
+
+module.exports = { registerTeacher, getAllTeachers, verifyTeacher };
