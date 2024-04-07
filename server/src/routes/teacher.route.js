@@ -1,4 +1,4 @@
-const { subjectController, topicController, streamController } = require("../controllers");
+const { subjectController, topicController, streamController, questionController } = require("../controllers");
 const validate = require("../middlewares/validate");
 const { subjectValidation, topicValidation, streamValidation, teacherValidation } = require("../validations");
 const auth = require("../middlewares/auth");
@@ -37,7 +37,7 @@ router
   .delete(validate(topicValidation.deleteTopicById),topicController.deleteTopicById)
 
   // add question to perticular topic 
-  router.route("/topic/:topic_id/add-question").post()
+  router.route("/topic/:topic_id/add-question").post(questionController.addQuestion)
 
 
 module.exports = router;

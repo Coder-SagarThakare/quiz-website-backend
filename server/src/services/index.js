@@ -8,3 +8,4 @@ module.exports.topicService = require("./topic.service");
 module.exports.streamService = require("./stream.service");
 module.exports.teacherService = require("./teacher.service");
 module.exports.cloudinaryService = require("./cloudinary.service");
+module.exports.questionService = require("./question.service");

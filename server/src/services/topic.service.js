@@ -20,9 +20,6 @@ const addNewTopic = async (subjectId, body) => {
   });
 
 
-  console.log(isAlreadyAdded);
-  console.log(payload.name);
-
   if (isAlreadyAdded)
     throw new ApiError(
       httpStatus.CONFLICT,
