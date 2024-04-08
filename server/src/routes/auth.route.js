@@ -14,22 +14,24 @@ router.get("/", (req, res) => {
 
 router.post(
   "/student/register",
-  [captcha.verify, validate(authValidation.register)],
-  authController.register
+  [captcha.verify, validate(authValidation.registerStudent)],
+  authController.registerStudent
 );
 
 router.post(
   "/student/login",
-  [captcha.verify, validate(authValidation.login)],
-  authController.login
+  [captcha.verify, validate(authValidation.loginStudent)],
+  authController.loginStudent
 );
 
 router.post(  
   "/teacher/register",
   upload.single("collegeIdProof") ,
-  validate(teacherValidation.registerTeacher),
-  teacherController.registerTeacher
+  validate(authValidation.registerTeacher),
+  authController.registerTeacher
 );
+
+router.post("/teacher/login",validate(authValidation.loginTeacher),authController.loginTeacher)
 
 router.post(
   "/login/:provider",

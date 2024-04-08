@@ -8,7 +8,9 @@ const {
 } = require("../services");
 const httpStatus = require("http-status");
 
-const register = catchAsync(async (req, res) => {
+
+// student registration
+const registerStudent = catchAsync(async (req, res) => {
   let user = await authService.registerUser({ ...req.body });
 
   const { token, expires } = await tokenService.generateAuthTokens(user);
@@ -16,7 +18,8 @@ const register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).json({ user, token, expires });
 });
 
-const login = catchAsync(async (req, res) => {
+// student login
+const loginStudent = catchAsync(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await authService.loginUserWithEmailAndPassword(email, password);
@@ -28,6 +31,25 @@ const login = catchAsync(async (req, res) => {
     expires,
   });
 });
+
+// register teacher
+const registerTeacher = catchAsync(async (req, res) => {
+  if (!req.file) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Please upload an image.");
+  }
+
+  await teacherService.registerTeacher({ ...req.body }, req.file.path);
+  res
+    .status(httpStatus.CREATED)
+    .send({ message: "Teacher registered sucessfully" });
+});
+
+// login teacher
+const loginTeacher = catchAsync(async (req, res) => {
+  console.log("req.body",req.body);
+  res.send("working");
+});
+
 
 const socialLogin = catchAsync(async (req, res) => {
   const idToken = req.body.token;
@@ -102,8 +124,10 @@ const verifyOTP = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  register,
-  login,
+  registerStudent,
+  loginStudent,
+  registerTeacher,
+  loginTeacher,
   socialLogin,
   forgotPassword,
   resetPassword,
