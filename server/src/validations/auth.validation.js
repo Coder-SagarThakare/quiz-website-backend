@@ -17,6 +17,9 @@ const login = {
   }),
 };
 
+const studentLogin = login
+const teacherLogin = login
+
 const socialLogin = {
   body: Joi.object().keys({
     token: Joi.string().required(),
@@ -51,7 +54,8 @@ const verifyOTP = {
 };
 module.exports = {
   register,
-  login,
+  studentLogin,
+  teacherLogin,
   socialLogin,
   forgotPassword,
   resetPassword,

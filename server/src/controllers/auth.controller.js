@@ -29,6 +29,15 @@ const login = catchAsync(async (req, res) => {
   });
 });
 
+const loginTecaher =  catchAsync(async(req,res)=>{
+  const { email, password } = req.body;
+
+  const teacher = await authService.loginTeacherWithEmailAndPassword(email,password)
+
+  res.send(teacher)
+
+})
+
 const socialLogin = catchAsync(async (req, res) => {
   const idToken = req.body.token;
   let user;
@@ -104,6 +113,7 @@ const verifyOTP = catchAsync(async (req, res) => {
 module.exports = {
   register,
   login,
+  loginTecaher,
   socialLogin,
   forgotPassword,
   resetPassword,

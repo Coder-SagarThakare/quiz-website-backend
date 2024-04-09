@@ -20,7 +20,7 @@ router.post(
 
 router.post(
   "/student/login",
-  [captcha.verify, validate(authValidation.login)],
+  [captcha.verify, validate(authValidation.studentLogin)],
   authController.login
 );
 
@@ -31,6 +31,7 @@ router.post(
   teacherController.registerTeacher
 );
 
+router.post("/teacher/login",validate(authValidation.teacherLogin),authController.loginTecaher)
 router.post(
   "/login/:provider",
   [captcha.verify, validate(authValidation.socialLogin)],
