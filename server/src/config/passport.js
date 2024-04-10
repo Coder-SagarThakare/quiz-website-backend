@@ -15,7 +15,7 @@ const jwtVerify = async (payload, done) => {
     }
     const user = await User.findById(payload.sub);
 
-    if (!user || user.deleted) {
+    if (!user || user.isDeleted) {
       return done(null, false);
     }
     done(null, user);

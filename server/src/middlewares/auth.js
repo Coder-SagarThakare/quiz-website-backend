@@ -30,7 +30,7 @@ const verifyCallBack = (req, resolve, reject, requiredRights) => {
     }
 
     //Reject user if user is deleted
-    if (user.deleted) {
+    if (user.isDeleted) {
       return reject(new ApiError(httpStatus.UNAUTHORIZED, "User deleted"));
     }
     req.user = user;

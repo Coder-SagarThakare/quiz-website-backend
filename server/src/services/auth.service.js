@@ -45,7 +45,7 @@ const loginWithGoogle = async (idToken) => {
 
   let user = await userService.getUserByEmail(email);
 
-  if (!user || user.deleted) {
+  if (!user || user.isDeleted) {
     user = await registerUser({
       name,
       email,
