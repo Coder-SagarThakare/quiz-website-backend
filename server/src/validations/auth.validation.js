@@ -10,7 +10,7 @@ const registerStudent = {
   }),
 };
 
-const loginStudent = {
+const login = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -36,13 +36,6 @@ const registerTeacher = {
     linkedIn: Joi.string(),
     github: Joi.string(),
   })
-};
-
-const loginTeacher = {
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
 };
 
 const studentLogin = login
@@ -82,7 +75,7 @@ const verifyOTP = {
 };
 
 module.exports = {
-  register,
+  registerStudent,
   studentLogin,
   teacherLogin,
   socialLogin,
@@ -91,5 +84,4 @@ module.exports = {
   verifyEmail,
   verifyOTP,
   registerTeacher,
-  loginTeacher
 };

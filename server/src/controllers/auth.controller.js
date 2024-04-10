@@ -19,7 +19,7 @@ const registerStudent = catchAsync(async (req, res) => {
 });
 
 // student login
-const loginStudent = catchAsync(async (req, res) => {
+const studentLogin = catchAsync(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await authService.loginUserWithEmailAndPassword(email, password);
@@ -44,13 +44,7 @@ const registerTeacher = catchAsync(async (req, res) => {
     .send({ message: "Teacher registered sucessfully" });
 });
 
-// login teacher
-const loginTeacher = catchAsync(async (req, res) => {
-  console.log("req.body",req.body);
-  res.send("working");
-});
-
-const loginTecaher =  catchAsync(async(req,res)=>{
+const loginTeacher =  catchAsync(async(req,res)=>{
   const { email, password } = req.body;
 
   const teacher = await authService.loginTeacherWithEmailAndPassword(email,password)
@@ -133,7 +127,7 @@ const verifyOTP = catchAsync(async (req, res) => {
 
 module.exports = {
   registerStudent,
-  loginStudent,
+  studentLogin,
   registerTeacher,
   loginTeacher,
   socialLogin,

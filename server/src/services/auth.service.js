@@ -15,7 +15,7 @@ const { tokenTypes } = require("../config/token");
  */
 const loginUserWithEmailAndPassword = async (email, password) => {
   const user = await userService.getUserByEmail(email);
-  if (!user || user.deleted || !(await user.isPasswordMatch(password))) {
+  if (!user || user.idDeleted || !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");
   }
   return await user;
@@ -23,6 +23,10 @@ const loginUserWithEmailAndPassword = async (email, password) => {
 
 const loginTeacherWithEmailAndPassword = async (email,password)=>{
   const teacher = await teacherService.getTeacherById(email)
+
+  if(!teacher || teacher.isDeleted || !(await teacher.isPasswordMatch(password))){
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");
+  }
   return teacher
 }
 

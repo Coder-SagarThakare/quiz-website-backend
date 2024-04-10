@@ -134,6 +134,17 @@ teacherSchema.statics.isEmailTaken = async function (email, excludeUserId) {
   return !!teacher;
 };
 
+/**
+ * Check if password matches the teacher's password
+ * @param {string} password
+ * @returns {Promise<boolean>}
+ */
+teacherSchema.methods.isPasswordMatch = async function (password) {
+  const user = this;
+
+  return bcrypt.compare(password, user.password);
+};
+
 teacherSchema.pre("save", async function (next) {
   const user = this;
   if (user.isModified("password")) {
@@ -143,6 +154,7 @@ teacherSchema.pre("save", async function (next) {
 });
 
 teacherSchema.plugin(private);
+
 
 const Teacher = mongoose.model("tecaher", teacherSchema);
 
