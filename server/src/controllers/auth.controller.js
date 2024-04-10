@@ -50,6 +50,14 @@ const loginTeacher = catchAsync(async (req, res) => {
   res.send("working");
 });
 
+const loginTecaher =  catchAsync(async(req,res)=>{
+  const { email, password } = req.body;
+
+  const teacher = await authService.loginTeacherWithEmailAndPassword(email,password)
+
+  res.send(teacher)
+
+})
 
 const socialLogin = catchAsync(async (req, res) => {
   const idToken = req.body.token;

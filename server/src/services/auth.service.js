@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const userService = require("./user.service");
 const tokenService = require("./token.service");
+const teacherService  = require("./teacher.service");
 const ApiError = require("../utils/ApiError");
 const { OAuth2Client } = require("google-auth-library");
 const config = require("../config/config");
@@ -19,6 +20,11 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   }
   return await user;
 };
+
+const loginTeacherWithEmailAndPassword = async (email,password)=>{
+  const teacher = await teacherService.getTeacherById(email)
+  return teacher
+}
 
 const loginWithGoogle = async (idToken) => {
   const oAuth2Client = new OAuth2Client(config.socialLogin.google.clientId);
@@ -100,6 +106,7 @@ const verifyEmail = async (verifyEmailToken) => {
 };
 module.exports = {
   loginUserWithEmailAndPassword,
+  loginTeacherWithEmailAndPassword,
   loginWithGoogle,
   registerUser,
   resetPassword,
