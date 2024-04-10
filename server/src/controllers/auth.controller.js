@@ -5,6 +5,7 @@ const {
   emailService,
   otpService,
   userService,
+  teacherService,
 } = require("../services");
 const httpStatus = require("http-status");
 

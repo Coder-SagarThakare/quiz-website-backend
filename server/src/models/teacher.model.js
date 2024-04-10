@@ -112,6 +112,7 @@ const teacherSchema = mongoose.Schema(
     isDeleted: {
       type: Boolean,
       default: false,
+      private : true  
     },
     isPasswordUpdated: {
       type: Boolean,
