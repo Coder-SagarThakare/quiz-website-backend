@@ -24,12 +24,9 @@ const studentLogin = catchAsync(async (req, res) => {
 
   const user = await authService.loginUserWithEmailAndPassword(email, password);
 
-  const { token, expires } = await tokenService.generateAuthTokens(user);
-  res.send({
-    user,
-    token,
-    expires,
-  });
+  const token = await tokenService.generateAuthTokens(user);
+  
+  res.send(token);
 });
 
 // register teacher
@@ -51,9 +48,9 @@ const loginTeacher = catchAsync(async (req, res) => {
     email,
     password
   );
-  const token = await tokenService.generateAuthTokens(teacher)
+  const token = await tokenService.generateAuthTokens(teacher);
 
-  res.send(token);
+  res.status(httpStatus.OK).send(token);
 });
 
 const socialLogin = catchAsync(async (req, res) => {
