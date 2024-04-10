@@ -23,6 +23,7 @@ const auth = (requiredRights) => async (req, res, next) => {
 const verifyCallBack = (req, resolve, reject, requiredRights) => {
   // err, user, info this data coming from jwtVerify() => done(null,user)
   return async (err, user, info) => {
+
     if (err || info || !user) {
       return reject(
         new ApiError(httpStatus.UNAUTHORIZED, "please authenticate")
@@ -34,6 +35,7 @@ const verifyCallBack = (req, resolve, reject, requiredRights) => {
       return reject(new ApiError(httpStatus.UNAUTHORIZED, "User deleted"));
     }
     req.user = user;
+    console.log("REQ.USER : ",req.user);
 
     // check user role and give him rights
     if (requiredRights && req.user.role !== requiredRights) {

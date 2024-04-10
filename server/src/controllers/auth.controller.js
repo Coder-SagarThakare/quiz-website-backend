@@ -25,7 +25,7 @@ const studentLogin = catchAsync(async (req, res) => {
   const user = await authService.loginUserWithEmailAndPassword(email, password);
 
   const token = await tokenService.generateAuthTokens(user);
-  
+
   res.send(token);
 });
 
@@ -40,7 +40,7 @@ const registerTeacher = catchAsync(async (req, res) => {
     .status(httpStatus.CREATED)
     .send({ message: "Teacher registered sucessfully" });
 });
-
+// teacher login
 const loginTeacher = catchAsync(async (req, res) => {
   const { email, password } = req.body;
 

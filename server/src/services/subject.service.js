@@ -6,6 +6,9 @@ const SubjectNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Subject not found ");
 };
 
+const getAllSubjects = async ()=>{
+  return await Subject.find();
+}
 const addNewSubject = async (body) => {
   body.name = body.name.toUpperCase();
 
@@ -60,6 +63,7 @@ const deleteSubjectById = async (subjectId) => {
 
 module.exports = {
   addNewSubject,
+  getAllSubjects,
   addTopic,
   getSubjectById,
   updateSubjectById,

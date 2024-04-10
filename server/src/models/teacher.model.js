@@ -63,7 +63,7 @@ const teacherSchema = mongoose.Schema(
     birthDate : Date,
     role: {
       type: String,
-      default : "tecaher"
+      default : "teacher"
     },
 
     // ---------- organizational details 
