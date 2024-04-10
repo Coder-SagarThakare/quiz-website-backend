@@ -9,7 +9,6 @@ const {
 } = require("../services");
 const httpStatus = require("http-status");
 
-
 // student registration
 const registerStudent = catchAsync(async (req, res) => {
   let user = await authService.registerUser({ ...req.body });
@@ -45,14 +44,17 @@ const registerTeacher = catchAsync(async (req, res) => {
     .send({ message: "Teacher registered sucessfully" });
 });
 
-const loginTeacher =  catchAsync(async(req,res)=>{
+const loginTeacher = catchAsync(async (req, res) => {
   const { email, password } = req.body;
 
-  const teacher = await authService.loginTeacherWithEmailAndPassword(email,password)
+  const teacher = await authService.loginTeacherWithEmailAndPassword(
+    email,
+    password
+  );
+  const token = await tokenService.generateAuthTokens(teacher)
 
-  res.send(teacher)
-
-})
+  res.send(token);
+});
 
 const socialLogin = catchAsync(async (req, res) => {
   const idToken = req.body.token;
