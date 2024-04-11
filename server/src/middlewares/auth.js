@@ -35,7 +35,6 @@ const verifyCallBack = (req, resolve, reject, requiredRights) => {
       return reject(new ApiError(httpStatus.UNAUTHORIZED, "User deleted"));
     }
     req.user = user;
-    console.log("REQ.USER : ",req.user);
 
     // check user role and give him rights
     if (requiredRights && req.user.role !== requiredRights) {

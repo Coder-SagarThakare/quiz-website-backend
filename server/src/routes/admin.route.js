@@ -18,8 +18,8 @@ router
 router
   .route('/stream/:streamId')
   .get(validate(streamValidation.getStreamById), streamController.getStreamById)
-  .patch(validate(streamValidation.updateStreamById), streamController.updateStreamById)   // add validations
-  .delete(validate(streamValidation.deleteStreamById), streamController.deleteStreamById)  // add validations
+  .patch(validate(streamValidation.updateStreamById), streamController.updateStreamById)   
+  .delete(validate(streamValidation.deleteStreamById), streamController.deleteStreamById)  
 
 // get all teachers
 router.get('/all-teachers', teacherController.getAllTeachers)

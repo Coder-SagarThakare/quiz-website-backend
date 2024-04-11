@@ -10,9 +10,6 @@ const streamNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Stream not found");
 };
 
-// folder name on cloudinary server to save our stream background images
-const targetedFolder = "QuizEasy/stream_bgImages"
-
 const addStream = async (body, file) => {
   const stream = await Stream.findOne({ name: body.name });
 
@@ -24,7 +21,7 @@ const addStream = async (body, file) => {
 
   const result = await uploadFileToCloudinary(
     file.path,
-    targetedFolder
+    "stream_bgImages"
   );
 
   body.bgImage = result.secure_url;

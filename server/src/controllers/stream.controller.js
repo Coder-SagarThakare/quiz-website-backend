@@ -1,9 +1,13 @@
 const httpStatus = require("http-status");
 const { streamService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
+const ApiError = require("../utils/ApiError");
 
 const addStream = catchAsync(async (req, res) => {
-  // add createdBY in req.body
+
+  if (!req.file) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Please upload an image.");
+  }
   req.body.createdBy = req.user._id;
 
   const stream = await streamService.addStream(req.body, req.file);

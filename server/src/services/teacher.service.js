@@ -12,7 +12,7 @@ const registerTeacher = async (userBody, file) => {
       throw new ApiError(httpStatus.BAD_REQUEST, "Teacher already exists with this email")
     }
 
-    const result = await uploadFileToCloudinary(file, `/QuizEazy/Teacher/CollegeIdProof/${userBody.email}`)
+    const result = await uploadFileToCloudinary(file, `Teacher/${userBody.email}/CollegeIdProof/`)
 
     deleteLocalFile(file)
 

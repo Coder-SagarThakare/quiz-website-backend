@@ -10,11 +10,11 @@ cloudinary.config({
   api_secret: config.cloudinary.api_secret,
 });
   
-const uploadFileToCloudinary = async (file, folderName = "QuizEasy") => {
+const uploadFileToCloudinary = async (file, folderName = "") => {
 
   try {
     const result = await cloudinary.uploader.upload(file, {
-      folder: folderName,
+      folder: `QuizEasy/${folderName}`,
     });
 
     return result;
