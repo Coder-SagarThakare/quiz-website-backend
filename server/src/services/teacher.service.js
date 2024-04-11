@@ -4,7 +4,6 @@ const ApiError = require("../utils/ApiError");
 const { uploadFileToCloudinary } = require("./cloudinary.service");
 const { deleteLocalFile } = require("./file.service");
 
-
 const registerTeacher = async (userBody, file) => {
   try {
     if (await Teacher.isEmailTaken(userBody.email)) {
@@ -30,6 +29,7 @@ const getTeacherById = async (email) => {
   const teacher = Teacher.findOne({ email })
   return teacher
 }
+
 const getAllTeachers = async () => {
   return await Teacher.find()
 }

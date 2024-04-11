@@ -18,9 +18,10 @@ router
 router
   .route('/stream/:streamId')
   .get(validate(streamValidation.getStreamById), streamController.getStreamById)
-  .patch(validate(streamValidation.updateStreamById), streamController.updateStreamById)   
-  .delete(validate(streamValidation.deleteStreamById), streamController.deleteStreamById)  
-
+  .patch(validate(streamValidation.updateStreamById), streamController.updateStreamById)
+  .delete(validate(streamValidation.deleteStreamById), streamController.deleteStreamById)
+ 
+  router.patch('/stream/update-image/:streamId', upload.single("streamImg"),streamController.updateProfilePhoto)
 // get all teachers
 router.get('/all-teachers', teacherController.getAllTeachers)
 
