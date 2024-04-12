@@ -49,7 +49,10 @@ const userSchema = mongoose.Schema(
       default: "https://i.imgur.com/CR1iy7U.png",
     },
     birthDate: Date,
-    bio: "Hey I am using QuizEazy...",
+    bio: {
+      type : String,
+      default : "Hey I am using QuizEazy..."
+    },
     college: String,
 
     // social
