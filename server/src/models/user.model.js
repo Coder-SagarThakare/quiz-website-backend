@@ -5,6 +5,8 @@ const { private } = require("./plugins");
 
 const userSchema = mongoose.Schema(
   {
+
+    // personal info 
     name: {
       type: String,
       required: true,
@@ -48,9 +50,13 @@ const userSchema = mongoose.Schema(
     },
     birthDate: Date,
     bio: "Hey I am using QuizEazy...",
+    college: String,
+
+    // social
     linkedIn: String,
     github: String,
-    college: String,
+
+    // for backend purpose
     role: {
       type: String,
       default: "student",
