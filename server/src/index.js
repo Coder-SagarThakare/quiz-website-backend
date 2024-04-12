@@ -15,7 +15,7 @@ server = app.listen(
 );
 
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(()=>{
-  logger.info(`connected to MongoDB => ${config.mongoose.url}`);
+  logger.info(`connected to MongoDB => QUIZZY`);
   logger.warn("--------------------------------------");
 })
   
