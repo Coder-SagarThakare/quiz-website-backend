@@ -37,9 +37,28 @@ const userSchema = mongoose.Schema(
       },
       private: true, // used by the private plugin
     },
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+      required: true,
+    },
     picture: {
       type: String,
       default: "https://i.imgur.com/CR1iy7U.png",
+    },
+    birthDate: Date,
+    bio: "Hey I am using QuizEazy...",
+    linkedIn: String,
+    github: String,
+    college: String,
+    role: {
+      type: String,
+      default: "student",
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      private: true,
     },
     isEmailVerified: {
       type: Boolean,
@@ -48,14 +67,6 @@ const userSchema = mongoose.Schema(
     isPasswordUpdated: {
       type: Boolean,
       default: true,
-    },
-    role: {
-      type: String,
-    },
-    gender: {
-      type: String,
-      enum: ["male", "female", "other"],
-      required: true,
     },
     otp: {
       type: Number,
