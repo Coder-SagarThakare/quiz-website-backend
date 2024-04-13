@@ -2,7 +2,7 @@ const httpStatus = require("http-status");
 const { Teacher } = require("../models");
 const ApiError = require("../utils/ApiError");
 const { uploadFileToCloudinary } = require("./cloudinary.service");
-const { deleteLocalFile } = require("./file.service");
+// const { deleteLocalFile } = require("./file.service");
 
 const registerTeacher = async (userBody, file) => {
   try {
@@ -11,9 +11,9 @@ const registerTeacher = async (userBody, file) => {
       throw new ApiError(httpStatus.BAD_REQUEST, "Teacher already exists with this email")
     }
 
-    const result = await uploadFileToCloudinary(file, `Teacher/${userBody.email}/CollegeIdProof/`)
+    const result = await uploadFileToCloudinary(file.buffer, `Teacher/${userBody.email}/CollegeIdProof/`)
 
-    deleteLocalFile(file)
+    // deleteLocalFile(file)
 
     userBody.publicId = result.public_id;
     userBody.collegeIdProof = result.secure_url;

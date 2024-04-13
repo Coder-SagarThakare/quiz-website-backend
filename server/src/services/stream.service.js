@@ -20,7 +20,7 @@ const addStream = async (body, file) => {
     );
 
   const result = await uploadFileToCloudinary(
-    file.path,
+    file.buffer,
     "stream_bgImages"
   );
 

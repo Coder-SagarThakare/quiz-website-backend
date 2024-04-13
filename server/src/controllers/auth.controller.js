@@ -8,6 +8,7 @@ const {
   teacherService,
 } = require("../services");
 const httpStatus = require("http-status");
+const ApiError = require("../utils/ApiError");
 
 // student registration
 const registerStudent = catchAsync(async (req, res) => {
