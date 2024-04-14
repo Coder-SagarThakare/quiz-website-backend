@@ -14,9 +14,9 @@ const ApiError = require("../utils/ApiError");
 const registerStudent = catchAsync(async (req, res) => {
   let user = await authService.registerUser({ ...req.body });
 
-  const { token, expires } = await tokenService.generateAuthTokens(user);
+  const token = await tokenService.generateAuthTokens(user);
 
-  res.status(httpStatus.CREATED).json({ user, token, expires });
+  res.status(httpStatus.CREATED).json(token);
 });
 
 // student login

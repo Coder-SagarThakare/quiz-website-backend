@@ -30,7 +30,9 @@ const addStream = async (body, file) => {
   const newStream = await Stream.create(body);
   return newStream.name;
 };
-
+const getAllStreams = async()=>{
+  return await Stream.find()
+}
 const getStreamById = async (streamId) => {
   const resp = await Stream.findOne({ _id: streamId });
 
@@ -66,6 +68,7 @@ const deleteStreamById = async (streamId) => {
 
 module.exports = {
   addStream,
+  getAllStreams,
   getStreamById,
   deleteStreamById,
   updateStreamById,

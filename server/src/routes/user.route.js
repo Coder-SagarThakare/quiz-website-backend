@@ -6,7 +6,7 @@ const { userValidation } = require("../validations");
 const router = require("express").Router();
 
 // Token authentication for all routes defined in this file
-router.use(auth());
+router.use(auth("student"));
 
 // get update user
 router
@@ -14,4 +14,5 @@ router
   .get(userController.getUser)
   .patch(validate(userValidation.updateUser), userController.updateUser);
 
+  router.get("/all-streams",userController.getAllStreams)
 module.exports = router;
