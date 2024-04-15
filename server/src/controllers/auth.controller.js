@@ -25,9 +25,9 @@ const studentLogin = catchAsync(async (req, res) => {
 
   const user = await authService.loginUserWithEmailAndPassword(email, password);
 
-  const token = await tokenService.generateAuthTokens(user);
+  const { token } = await tokenService.generateAuthTokens(user);
 
-  res.send(token);
+  res.send({ token, user });
 });
 
 // register teacher
