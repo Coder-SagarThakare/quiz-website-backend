@@ -24,6 +24,11 @@ const addTopic = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send({ message: "topic added successfully" });
 });
 
+const getSubjectsByStreamId = catchAsync(async(req,res)=>{
+  const subjects = subjectService.getSubjectsByStreamId(req.params.streamId)
+  res.status(httpStatus.OK).send(subjects)
+})
+
 const updateTopics = catchAsync();
 const getSubjectById = catchAsync(async (req, res) => {
   const subject = await subjectService.getSubjectById(req.params.subject_id);
@@ -47,6 +52,7 @@ const deleteSubjectById = catchAsync(async (req, res) => {
 module.exports = {
   addNewSubject,
   addTopic,
+  getSubjectsByStreamId,
   getSubjectById,
   updateSubjectById,
   deleteSubjectById,

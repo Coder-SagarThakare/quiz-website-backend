@@ -9,6 +9,7 @@ const SubjectNotFoundErr = () => {
 const getAllSubjects = async ()=>{
   return await Subject.find();
 }
+
 const addNewSubject = async (body) => {
   body.name = body.name.toUpperCase();
 
@@ -61,6 +62,11 @@ const deleteSubjectById = async (subjectId) => {
   return resp;
 };
 
+const getSubjectsByStreamId = async (streamId)=>{
+  return await Subject.find({stream : streamId})
+}
+
+
 module.exports = {
   addNewSubject,
   getAllSubjects,
@@ -68,4 +74,5 @@ module.exports = {
   getSubjectById,
   updateSubjectById,
   deleteSubjectById,
+  getSubjectsByStreamId
 };

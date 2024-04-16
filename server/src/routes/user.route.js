@@ -1,4 +1,4 @@
-const { userController } = require("../controllers");
+const { userController, subjectController } = require("../controllers");
 const auth = require("../middlewares/auth");
 const validate = require("../middlewares/validate");
 const { userValidation } = require("../validations");
@@ -14,5 +14,8 @@ router
   .get(userController.getUser)
   .patch(validate(userValidation.updateUser), userController.updateUser);
 
-  router.get("/all-streams",userController.getAllStreams)
+router.get("/all-streams", userController.getAllStreams);
+
+router.get("/stream/:streamId", subjectController.getSubjectsByStreamId); // add validation
+
 module.exports = router;
