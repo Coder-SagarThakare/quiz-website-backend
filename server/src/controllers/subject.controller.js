@@ -3,7 +3,10 @@ const { subjectService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 
 const addNewSubject = catchAsync(async (req, res) => {
-  const response = await subjectService.addNewSubject(req.body);
+  req.body.stream = req.params.streamId;
+  req.body.createdBy = req.user._id;
+
+  const response = await subjectService.addNewSubject(req.body,);
   res.status(httpStatus.CREATED).send(response);
 });
 

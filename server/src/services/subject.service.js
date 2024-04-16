@@ -11,14 +11,14 @@ const getAllSubjects = async ()=>{
 }
 
 const addNewSubject = async (body) => {
-  body.name = body.name.toUpperCase();
+  // body.name = body.name.toUpperCase();
 
   const isSubTaken = await Subject.isSubjectTaken(body.name);
 
   if (isSubTaken)
     throw new ApiError(httpStatus.CONFLICT, "This Subject already added");
 
-  return Subject.create(body);
+  return await  Subject.create(body);
 };
 
 const addTopic = async (subjectId, topic) => {
