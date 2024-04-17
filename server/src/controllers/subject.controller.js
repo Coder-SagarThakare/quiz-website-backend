@@ -28,7 +28,7 @@ const addTopic = catchAsync(async (req, res) => {
 });
 
 const getSubjectsByStreamId = catchAsync(async(req,res)=>{
-  const subjects = subjectService.getSubjectsByStreamId(req.params.streamId)
+  const subjects =await  subjectService.getSubjectsByStreamId(req.params.streamId)
   res.status(httpStatus.OK).send(subjects)
 })
 
