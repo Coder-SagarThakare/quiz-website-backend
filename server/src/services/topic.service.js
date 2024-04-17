@@ -28,9 +28,8 @@ const addNewTopic = async (subjectId, body) => {
 
   payload.subject = subjectId;
 
-  await Topic.create(payload);
+  return await Topic.create(payload);
 
-  return true;
 };
 
 const getTopicById = async (topicId) => {
