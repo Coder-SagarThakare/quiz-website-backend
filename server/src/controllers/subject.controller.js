@@ -6,7 +6,7 @@ const addNewSubject = catchAsync(async (req, res) => {
   req.body.stream = req.params.streamId;
   req.body.createdBy = req.user._id;
 
-  const response = await subjectService.addNewSubject(req.body,);
+  const response = await subjectService.addNewSubject(req.body);
   res.status(httpStatus.CREATED).send(response);
 });
 
@@ -27,10 +27,12 @@ const addTopic = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send({ message: "topic added successfully" });
 });
 
-const getSubjectsByStreamId = catchAsync(async(req,res)=>{
-  const subjects = subjectService.getSubjectsByStreamId(req.params.streamId)
-  res.status(httpStatus.OK).send(subjects)
-})
+const getSubjectsByStreamId = catchAsync(async (req, res) => {
+  const subjects = await subjectService.getSubjectsByStreamId(
+    req.params.streamId
+  );
+  res.status(httpStatus.OK).send(subjects);
+});
 
 const updateTopics = catchAsync();
 const getSubjectById = catchAsync(async (req, res) => {
