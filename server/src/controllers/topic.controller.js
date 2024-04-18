@@ -27,9 +27,15 @@ const deleteTopicById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ message: "Topic deleted successfully" });
 });
 
+const getTopicsBySubjectId = catchAsync(async(req,res)=>{
+  const topics = await topicService.getTopicsBySubjectId(req.params.subject_id)
+  res.status(httpStatus.OK).send(topics)
+})
+
 module.exports = {
   addNewTopic,
   getTopicById,
   updateTopicById,
   deleteTopicById,
+  getTopicsBySubjectId,
 };

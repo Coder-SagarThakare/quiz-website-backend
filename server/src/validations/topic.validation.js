@@ -16,6 +16,7 @@ const getTopicById = {
     topic_id: paramsIdValidtion,
   }),
 };
+
 const updateTopicById = {
   body: Joi.object().keys({
     name: Joi.string().required(),
@@ -31,9 +32,16 @@ const deleteTopicById = {
   }),
 };
 
+const getTopicsBySubjectId = {
+  params: Joi.object().keys({
+    subject_id: paramsIdValidtion,
+  }),
+};
+
 module.exports = {
   addNewTopic,
   getTopicById,
   updateTopicById,
   deleteTopicById,
+  getTopicsBySubjectId,
 };

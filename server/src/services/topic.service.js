@@ -16,9 +16,8 @@ const addNewTopic = async (subjectId, body) => {
 
   const isAlreadyAdded = await Topic.findOne({
     subject: subjectId,
-    name: payload.name,   // This value will be converted to lowercase before the query
+    name: payload.name, // This value will be converted to lowercase before the query
   });
-
 
   if (isAlreadyAdded)
     throw new ApiError(
@@ -29,7 +28,6 @@ const addNewTopic = async (subjectId, body) => {
   payload.subject = subjectId;
 
   return await Topic.create(payload);
-
 };
 
 const getTopicById = async (topicId) => {
@@ -51,10 +49,13 @@ const updateTopicById = async (topicId, updatedBody) => {
 const deleteTopicById = async (topicId) => {
   const resp = await Topic.deleteOne({ _id: topicId });
 
-
   if (resp.deletedCount < 1) topicNotFoundErr();
 
   return true;
+};
+
+const getTopicsBySubjectId = async (subjectId) => {
+  return await Topic.find({ subject: subjectId });
 };
 
 module.exports = {
@@ -62,4 +63,5 @@ module.exports = {
   getTopicById,
   updateTopicById,
   deleteTopicById,
+  getTopicsBySubjectId,
 };

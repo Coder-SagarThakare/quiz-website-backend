@@ -1,7 +1,15 @@
-const { userController, subjectController } = require("../controllers");
+const {
+  userController,
+  subjectController,
+  topicController,
+} = require("../controllers");
 const auth = require("../middlewares/auth");
 const validate = require("../middlewares/validate");
-const { userValidation, subjectValidation, streamValidation } = require("../validations");
+const {
+  userValidation,
+  streamValidation,
+  topicValidation,
+} = require("../validations");
 
 const router = require("express").Router();
 
@@ -22,5 +30,10 @@ router.get(
   subjectController.getSubjectsByStreamId
 ); // add validation
 
-// router.get("/stream/subject/:subjectId",)
+router.get(
+  "/stream/subject/:subject_id",
+  validate(topicValidation.getTopicsBySubjectId),
+  topicController.getTopicsBySubjectId
+);
+
 module.exports = router;
