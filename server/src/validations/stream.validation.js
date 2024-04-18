@@ -29,9 +29,14 @@ const deleteStreamById = {
   params: paramsValidation,
 };
 
+const getSubjectsByStreamId = {
+  params: paramsValidation,
+};
+
 module.exports = {
   addStream,
   getStreamById,
   updateStreamById,
   deleteStreamById,
+  getSubjectsByStreamId
 };
