@@ -10,15 +10,16 @@ const subjectSchema = mongoose.Schema(
       required: true,
       set: (value) => value.toUpperCase(),
     },
+    topics: [String],
     stream: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref:"stream"
+      ref: "stream"
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref : "user"
+      ref: "user"
     },
   },
   { timestamps: true }
