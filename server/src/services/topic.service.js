@@ -18,7 +18,7 @@ const addNewTopic = async (subjectId, body) => {
     subject: subjectId,
     name: payload.name, // This value will be converted to lowercase before the query
   });
-
+  
   if (isAlreadyAdded)
     throw new ApiError(
       httpStatus.CONFLICT,

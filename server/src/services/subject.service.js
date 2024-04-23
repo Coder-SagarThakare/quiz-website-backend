@@ -37,7 +37,15 @@ const getSubjectById = async (subjectId) => {
   return resp;
 };
 
-const updateSubjectById = async (subjectId, updatedBody) => {
+const updateSubjectById = async (subjectId, updatedBody, reArrangeTopics=false) => {
+
+  if(reArrangeTopics){
+    // NEED TO ARRANGE TOPIC 
+
+    // const subject = await Subject.find(subjectId);
+    // updatedBody = subject.topics.push(updatedBody) 
+  }
+
   const resp = await Subject.findOneAndUpdate(
     { _id: subjectId },
     { ...updatedBody }

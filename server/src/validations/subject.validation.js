@@ -21,8 +21,9 @@ const getSubjectById = {
 const updateSubjectById = {
   params: paramValidation,
   body: Joi.object().keys({
-    name: Joi.string().required().trim(),
-  }),
+    name: Joi.string().trim(),
+    topics : Joi.array().items(Joi.string().required())
+  }).or('name', 'topics'),
 };
 
 const deleteSubjectById = {

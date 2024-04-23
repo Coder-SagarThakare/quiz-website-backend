@@ -1,10 +1,15 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utils/catchAsync");
-const { topicService } = require("../services");
+const { topicService, subjectService } = require("../services");
+const { subjectController } = require(".");
 
 const addNewTopic = catchAsync(async (req, res) => {
+  const subjectId = req.params.subject_id;
 
-  await topicService.addNewTopic(req.params.subject_id, req.body);
+  const topic = await topicService.addNewTopic(subjectId, req.body);
+
+  await subjectService.updateSubjectById(subjectId, topic.name, true);
+  console.log(topic);
 
   res.status(httpStatus.OK).send({ message: "Topic added successfully" });
 });
@@ -27,10 +32,10 @@ const deleteTopicById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ message: "Topic deleted successfully" });
 });
 
-const getTopicsBySubjectId = catchAsync(async(req,res)=>{
-  const topics = await topicService.getTopicsBySubjectId(req.params.subject_id)
-  res.status(httpStatus.OK).send(topics)
-})
+const getTopicsBySubjectId = catchAsync(async (req, res) => {
+  const topics = await topicService.getTopicsBySubjectId(req.params.subject_id);
+  res.status(httpStatus.OK).send(topics);
+});
 
 module.exports = {
   addNewTopic,
