@@ -47,11 +47,14 @@ const updateTopicById = async (topicId, updatedBody) => {
 };
 
 const deleteTopicById = async (topicId) => {
+
+  const topic = await Topic.findById(topicId);
+  
   const resp = await Topic.deleteOne({ _id: topicId });
-
+  
   if (resp.deletedCount < 1) topicNotFoundErr();
+  return topic;
 
-  return true;
 };
 
 const getTopicsBySubjectId = async (subjectId) => {

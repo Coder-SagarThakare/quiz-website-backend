@@ -19,7 +19,7 @@ mongoose.connect(config.mongoose.url, config.mongoose.options).then(()=>{
   logger.warn("--------------------------------------");
 })
   
-mongoose.set("debug",true)
+// mongoose.set("debug",true)
 
 // Manually close the server if an unhandled exception occurs
 const exitHandler = () => {

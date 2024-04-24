@@ -42,12 +42,11 @@ const updateSubjectById = async (
   updatedBody,
   reArrangeTopics = false
 ) => {
+
+  // to add new topic in subject.topic[]
   if (reArrangeTopics) {
-
     const subject = await Subject.findById(subjectId);
-
     subject.topics.push(updatedBody);
-
     updatedBody = { topics: subject.topics };
   }
 

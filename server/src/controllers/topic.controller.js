@@ -27,8 +27,24 @@ const updateTopicById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ message: "Topic updated successfully" });
 });
 
+const removeElementFromArray = (array, element) => {
+  return array.filter((ele) => ele !== element)
+}
+
 const deleteTopicById = catchAsync(async (req, res) => {
-  await topicService.deleteTopicById(req.params.topic_id);
+  const topic = await topicService.deleteTopicById(req.params.topic_id);
+
+  const subject = await subjectService.getSubjectById(topic.subject)
+
+  console.log("topic : ", topic);
+  console.log("subject : ", subject);
+
+  const updatedTopics = removeElementFromArray(subject.topics, topic.name)
+
+  console.log("updatedTopics : ", updatedTopics);
+
+  await subjectService.updateSubjectById(subject._id, { topics: updatedTopics })
+
   res.status(httpStatus.OK).send({ message: "Topic deleted successfully" });
 });
 
