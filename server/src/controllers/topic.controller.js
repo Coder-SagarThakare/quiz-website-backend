@@ -9,7 +9,7 @@ const addNewTopic = catchAsync(async (req, res) => {
   const topic = await topicService.addNewTopic(subjectId, req.body);
 
   await subjectService.updateSubjectById(subjectId, topic.name, true);
-  console.log(topic);
+
 
   res.status(httpStatus.OK).send({ message: "Topic added successfully" });
 });

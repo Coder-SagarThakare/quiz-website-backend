@@ -6,9 +6,9 @@ const SubjectNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Subject not found ");
 };
 
-const getAllSubjects = async ()=>{
+const getAllSubjects = async () => {
   return await Subject.find();
-}
+};
 
 const addNewSubject = async (body) => {
   // body.name = body.name.toUpperCase();
@@ -18,7 +18,7 @@ const addNewSubject = async (body) => {
   if (isSubTaken)
     throw new ApiError(httpStatus.CONFLICT, "This Subject already added");
 
-  return await  Subject.create(body);
+  return await Subject.create(body);
 };
 
 const addTopic = async (subjectId, topic) => {
@@ -37,18 +37,24 @@ const getSubjectById = async (subjectId) => {
   return resp;
 };
 
-const updateSubjectById = async (subjectId, updatedBody, reArrangeTopics=false) => {
+const updateSubjectById = async (
+  subjectId,
+  updatedBody,
+  reArrangeTopics = false
+) => {
+  if (reArrangeTopics) {
 
-  if(reArrangeTopics){
-    // NEED TO ARRANGE TOPIC 
+    const subject = await Subject.findById(subjectId);
 
-    // const subject = await Subject.find(subjectId);
-    // updatedBody = subject.topics.push(updatedBody) 
+    subject.topics.push(updatedBody);
+
+    updatedBody = { topics: subject.topics };
   }
 
   const resp = await Subject.findOneAndUpdate(
     { _id: subjectId },
-    { ...updatedBody }
+    { ...updatedBody },
+    { new: true }
   );
 
   if (!resp) SubjectNotFoundErr();
@@ -63,17 +69,16 @@ const deleteSubjectById = async (subjectId) => {
 
   await Topic.deleteMany({ subject: subjectId });
 
-  const resp = await Subject.deleteOne({ _id: subjectId }); 
+  const resp = await Subject.deleteOne({ _id: subjectId });
 
   if (!resp) SubjectNotFoundErr();
 
   return resp;
 };
 
-const getSubjectsByStreamId = async (streamId)=>{
-  return await Subject.find({stream : streamId})
-}
-
+const getSubjectsByStreamId = async (streamId) => {
+  return await Subject.find({ stream: streamId });
+};
 
 module.exports = {
   addNewSubject,
@@ -82,5 +87,5 @@ module.exports = {
   getSubjectById,
   updateSubjectById,
   deleteSubjectById,
-  getSubjectsByStreamId
+  getSubjectsByStreamId,
 };
