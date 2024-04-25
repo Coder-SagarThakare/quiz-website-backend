@@ -7,9 +7,7 @@ const addNewTopic = catchAsync(async (req, res) => {
   const subjectId = req.params.subject_id;
 
   const topic = await topicService.addNewTopic(subjectId, req.body);
-
   await subjectService.updateSubjectById(subjectId, topic.name, true);
-
 
   res.status(httpStatus.OK).send({ message: "Topic added successfully" });
 });
@@ -20,9 +18,22 @@ const getTopicById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(topic);
 });
 
+const updateTopicName = (array, element, newElement) => {
+  return array.map((ele) => {
+    if (ele === element)
+      return newElement;
+    else
+      return ele
+  })
+}
+
 const updateTopicById = catchAsync(async (req, res) => {
-  req.body.name = req.body.name.toLowerCase();
-  await topicService.updateTopicById(req.params.topic_id, req.body);
+  const topic = await topicService.updateTopicById(req.params.topic_id, req.body);
+  const subject = await subjectService.getSubjectById(topic.subject)
+
+  const updatedTopics = updateTopicName(subject.topics, topic.name, req.body.name)
+
+  await subjectService.updateSubjectById(subject._id, { topics: updatedTopics })
 
   res.status(httpStatus.OK).send({ message: "Topic updated successfully" });
 });
@@ -35,13 +46,7 @@ const deleteTopicById = catchAsync(async (req, res) => {
   const topic = await topicService.deleteTopicById(req.params.topic_id);
 
   const subject = await subjectService.getSubjectById(topic.subject)
-
-  console.log("topic : ", topic);
-  console.log("subject : ", subject);
-
   const updatedTopics = removeElementFromArray(subject.topics, topic.name)
-
-  console.log("updatedTopics : ", updatedTopics);
 
   await subjectService.updateSubjectById(subject._id, { topics: updatedTopics })
 

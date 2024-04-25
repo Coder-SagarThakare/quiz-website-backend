@@ -18,7 +18,7 @@ const addNewTopic = async (subjectId, body) => {
     subject: subjectId,
     name: payload.name, // This value will be converted to lowercase before the query
   });
-  
+
   if (isAlreadyAdded)
     throw new ApiError(
       httpStatus.CONFLICT,
@@ -39,19 +39,19 @@ const getTopicById = async (topicId) => {
 };
 
 const updateTopicById = async (topicId, updatedBody) => {
-  const resp = await Topic.updateOne({ _id: topicId }, updatedBody);
+  const resp = await Topic.findOneAndUpdate({ _id: topicId }, updatedBody);
 
   if (resp.modifiedCount < 1) topicNotFoundErr();
 
-  return true;
+  return resp;
 };
 
 const deleteTopicById = async (topicId) => {
 
   const topic = await Topic.findById(topicId);
-  
+
   const resp = await Topic.deleteOne({ _id: topicId });
-  
+
   if (resp.deletedCount < 1) topicNotFoundErr();
   return topic;
 
