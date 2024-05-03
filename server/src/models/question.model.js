@@ -9,6 +9,7 @@ const questionSchema = mongoose.Schema(
       type: objectId,
       ref: "topic",
       required: true,
+      index : true
     },
     question: {
       type: String,
