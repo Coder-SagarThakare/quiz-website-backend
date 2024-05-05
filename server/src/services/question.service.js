@@ -4,6 +4,7 @@ const ApiError = require("../utils/ApiError");
 
 const addQuestion = async (questionBody) => {
 
+    console.log(questionBody);
     const result = await Question.find({question : questionBody.question})
 
     console.log(result);

@@ -10,6 +10,7 @@ const {
   topicValidation,
   streamValidation,
   teacherValidation,
+  questionValidation,
 } = require("../validations");
 const auth = require("../middlewares/auth");
 
@@ -66,7 +67,7 @@ router
 
 // add question to perticular topic
 router
-  .route("/topic/:topic_id/add-question")
-  .post(questionController.addQuestion);
+  .route("/topic/:topicId/add-question")
+  .post(validate(questionValidation.addQuestion), questionController.addQuestion);
 
 module.exports = router;
