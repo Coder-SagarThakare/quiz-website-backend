@@ -11,6 +11,7 @@ const passport = require('passport')
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const { jwtStrategy } = require("./config/passport");
 
+
 // ------------------  MIDDLEWARES  ----------------------------
 
 // JSON requests are received as plain text. We need to parse the json request body.

@@ -14,20 +14,26 @@ server = app.listen(
   logger.info(`Node server listening on port => ${config.port}`)
 );
 
-mongoose.connect(config.mongoose.url, config.mongoose.options).then(()=>{
+mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   logger.info(`connected to MongoDB => QUIZZY`);
   logger.warn("--------------------------------------");
-})
-  
+});
+
+
+setInterval(() => {
+  const date = new Date();
+  console.log(date);
+}, 900000);
+
 // mongoose.set("debug",true)
 
 // Manually close the server if an unhandled exception occurs
 const exitHandler = () => {
   if (server) {
     server.close(() => {
-      logger.info('---------------------------------------------------')
+      logger.info("---------------------------------------------------");
       logger.info("Server closed");
-      logger.info('---------------------------------------------------')
+      logger.info("---------------------------------------------------");
       process.exit(1);
     });
   } else {
