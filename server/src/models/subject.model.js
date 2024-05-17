@@ -20,6 +20,16 @@ const subjectSchema = mongoose.Schema(
       required: true,
       ref: "stream",
     },
+    publicId : {
+      type : String,
+      required : true
+    },
+    bgImage: {
+      type: String,
+      required: true,
+      // default:
+        // "https://res.cloudinary.com/difupvzin/image/upload/v1707290825/bgimage-stream.png",
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

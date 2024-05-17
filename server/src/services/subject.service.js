@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const { Subject, Topic } = require("../models");
 const ApiError = require("../utils/ApiError");
+const { uploadFileToCloudinary } = require("./cloudinary.service");
 
 const SubjectNotFoundErr = () => {
   throw new ApiError(httpStatus.NOT_FOUND, "Subject not found ");
@@ -10,13 +11,18 @@ const getAllSubjects = async () => {
   return await Subject.find();
 };
 
-const addNewSubject = async (body) => {
-  // body.name = body.name.toUpperCase();
+const addNewSubject = async (body, buffer) => {
+
 
   const isSubTaken = await Subject.isSubjectTaken(body.name);
 
   if (isSubTaken)
     throw new ApiError(httpStatus.CONFLICT, "This Subject already added");
+
+  const result = await uploadFileToCloudinary(buffer, "subject_bgImages")
+
+  body.bgImage = result.secure_url;
+  body.publicId = result.public_id;
 
   return await Subject.create(body);
 };

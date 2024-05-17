@@ -13,6 +13,7 @@ const {
   questionValidation,
 } = require("../validations");
 const auth = require("../middlewares/auth");
+const { upload } = require("../middlewares/multer");
 
 const router = require("express").Router();
 
@@ -22,10 +23,10 @@ router.use(auth("teacher"));
 // get all subjects
 router.get("/all-subjects", subjectController.getAllSubjects);
 
-// to add a new subject
+// add new subject
 router
   .route("/:streamId/add-subject")
-  .post(
+  .post(upload.single("subjectBgImage"),
     validate(subjectValidation.addNewSubject),
     subjectController.addNewSubject
   );
