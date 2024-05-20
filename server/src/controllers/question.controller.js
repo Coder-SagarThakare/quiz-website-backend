@@ -3,9 +3,11 @@ const catchAsync = require("../utils/catchAsync");
 const { questionService } = require("../services");
 
 const addQuestion = catchAsync(async(req, res) => {
-    await questionService.addQuestion(req.body)
+    req.body.topic = req.params.topicId;
 
-    res.status(httpStatus.OK).send("from questio controller")
+    const question = await questionService.addQuestion(req.body,req.params.topicId)
+
+    res.status(httpStatus.OK).send(question)
 })
 
 module.exports = {
