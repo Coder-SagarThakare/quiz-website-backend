@@ -1,11 +1,16 @@
 const httpStatus = require("http-status");
-const { Question } = require("../models");
+const { Question , Topic} = require("../models");
 const ApiError = require("../utils/ApiError");
 
 const addQuestion = async (questionBody,topicId) => {
 
+    const topic = await Topic.findById(topicId)
+    console.log(topic);
+
+    if(!topic)
+        throw new ApiError(httpStatus.NOT_FOUND, "Topic not found ");
+
     const result = await Question.findOne({question : questionBody.question})
-    console.log("result",result);
 
     if(result)
         throw new Error("Question already added");
