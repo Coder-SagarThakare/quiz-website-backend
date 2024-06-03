@@ -12,14 +12,15 @@ const getAllSubjects = async () => {
 };
 
 const addNewSubject = async (body, buffer) => {
-
-
   const isSubTaken = await Subject.isSubjectTaken(body.name);
 
   if (isSubTaken)
     throw new ApiError(httpStatus.CONFLICT, "This Subject already added");
 
-  const result = await uploadFileToCloudinary(buffer, "subject_bgImages")
+  const result = await uploadFileToCloudinary({
+    buffer,
+    folderName: "subject_bgImages",
+  });
 
   body.bgImage = result.secure_url;
   body.publicId = result.public_id;
@@ -48,7 +49,6 @@ const updateSubjectById = async (
   updatedBody,
   reArrangeTopics = false
 ) => {
-
   // to add new topic in subject.topic[]
   if (reArrangeTopics) {
     const subject = await Subject.findById(subjectId);
