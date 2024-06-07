@@ -43,6 +43,8 @@ const registerTeacher = catchAsync(async (req, res) => {
 });
 // teacher login
 const loginTeacher = catchAsync(async (req, res) => {
+
+  
   const { email, password } = req.body;
 
   const teacher = await authService.loginTeacherWithEmailAndPassword(
