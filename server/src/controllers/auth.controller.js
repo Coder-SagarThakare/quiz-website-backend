@@ -49,7 +49,7 @@ const loginTeacher = catchAsync(async (req, res) => {
     email,
     password
   );
-  const token = await tokenService.generateAuthTokens(teacher);
+  const {token} = await tokenService.generateAuthTokens(teacher);
 
   res.status(httpStatus.OK).send({ token, user: teacher });
 });
