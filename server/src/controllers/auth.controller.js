@@ -43,8 +43,6 @@ const registerTeacher = catchAsync(async (req, res) => {
 });
 // teacher login
 const loginTeacher = catchAsync(async (req, res) => {
-
-  
   const { email, password } = req.body;
 
   const teacher = await authService.loginTeacherWithEmailAndPassword(
@@ -53,7 +51,7 @@ const loginTeacher = catchAsync(async (req, res) => {
   );
   const token = await tokenService.generateAuthTokens(teacher);
 
-  res.status(httpStatus.OK).send(token);
+  res.status(httpStatus.OK).send({ token, user: teacher });
 });
 
 const socialLogin = catchAsync(async (req, res) => {
