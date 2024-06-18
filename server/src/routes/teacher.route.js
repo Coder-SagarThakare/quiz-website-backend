@@ -3,6 +3,7 @@ const {
   topicController,
   streamController,
   questionController,
+  teacherController,
 } = require("../controllers");
 const validate = require("../middlewares/validate");
 const {
@@ -19,6 +20,9 @@ const router = require("express").Router();
 
 // authenticate user has rights of teacher or not ?
 router.use(auth("teacher"));
+
+// get,update teacher data => pending
+router.route("/self").get(teacherController.getTeacher)
 
 // get all subjects
 router.get("/all-subjects", subjectController.getAllSubjects);

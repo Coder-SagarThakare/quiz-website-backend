@@ -12,8 +12,13 @@ const verifyTeacher = catchAsync(async (req, res) => {
   const result = await teacherService.verifyTeacher(req.params.teacherId);
   res.status(httpStatus.OK).send(result);
 });
+
+const getTeacher = catchAsync(async(req,res)=>{
+  res.send(httpStatus.OK,req.user)
+})
 module.exports = {
     getAllTeachers,
   verifyTeacher,
+  getTeacher
 
 };

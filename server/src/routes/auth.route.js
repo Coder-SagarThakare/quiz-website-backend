@@ -32,6 +32,7 @@ router.post(
 );
 
 router.post("/teacher/login",validate(authValidation.teacherLogin),authController.loginTeacher)
+// router.post("/teacher/login",validate(authValidation.teacherLogin),()=>{console.log("sss");})
 
 router.post(
   "/login/:provider",

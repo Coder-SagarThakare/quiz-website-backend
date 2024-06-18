@@ -39,8 +39,14 @@ const getTopicById = async (topicId) => {
 };
 
 const updateTopicById = async (topicId, updatedBody) => {
+
+  const topic = await Topic.findOne({ _id: topicId });
+
+  if (!topic) topicNotFoundErr();
+
   const resp = await Topic.findOneAndUpdate({ _id: topicId }, updatedBody);
 
+  console.log(resp);
   if (resp.modifiedCount < 1) topicNotFoundErr();
 
   return resp;

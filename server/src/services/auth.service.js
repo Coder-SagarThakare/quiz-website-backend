@@ -18,11 +18,11 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   if (!user || user.idDeleted || !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");
   }
-  return await user;
+  return await user;  
 };
 
 const loginTeacherWithEmailAndPassword = async (email,password)=>{
-  const teacher = await teacherService.getTeacherById(email)
+  const teacher = await teacherService.getTeacherByEmail(email)
 
   if(!teacher || teacher.isDeleted || !(await teacher.isPasswordMatch(password))){
     throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");

@@ -19,10 +19,10 @@ const addStream = async (body, file) => {
       `${stream.name} Stream already exist`
     );
 
-  const result = await uploadFileToCloudinary(
-    file.buffer,
-    "stream_bgImages"
-  );
+  const result = await uploadFileToCloudinary({
+    buffer: file.buffer,
+    folderName: "stream_bgImages",
+  });
 
   body.bgImage = result.secure_url;
   body.publicId = result.public_id;
@@ -30,9 +30,9 @@ const addStream = async (body, file) => {
   const newStream = await Stream.create(body);
   return newStream.name;
 };
-const getAllStreams = async()=>{
-  return await Stream.find()
-}
+const getAllStreams = async () => {
+  return await Stream.find();
+};
 const getStreamById = async (streamId) => {
   const resp = await Stream.findOne({ _id: streamId });
 

@@ -16,7 +16,7 @@ const router = require("express").Router();
 // Token authentication for all routes defined in this file
 router.use(auth("student"));
 
-// get update user
+// get,update user
 router
   .route("/self")
   .get(userController.getUser)

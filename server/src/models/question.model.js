@@ -15,16 +15,6 @@ const questionSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    publicId : {
-      type : String,
-      required : true
-    },
-    bgImage: {
-      type: String,
-      required: true,
-      default:
-        "https://res.cloudinary.com/difupvzin/image/upload/v1707290825/bgimage-stream.png",
-    },
     type: {
       type: String,
       required: true,

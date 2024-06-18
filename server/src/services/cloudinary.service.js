@@ -27,27 +27,39 @@ cloudinary.config({
 //   }
 // };
 
-const uploadFileToCloudinary = async (buffer, folderName = "") => {
+const uploadFileToCloudinary = async   ({
+  buffer,
+  folderName = "",
+  publicId = "",
+}) => {
+  console.log("buffer", buffer);
+
+  const uploadOptions = {
+    resource_type: "auto",
+    folder: `QuizEasy/${folderName}`,
+  };
+
+  if (publicId) {
+    uploadOptions.public_id = publicId;
+  }
+  // { resource_type: "auto", folder:`QuizEasy/${folderName}` }
   try {
     const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream(
-        { resource_type: "auto", folder:`QuizEasy/${folderName}` },
-        (error, result) => {
+      cloudinary.uploader
+        .upload_stream(uploadOptions, (error, result) => {
           if (error) {
+            console.error("Upload Error:", error);
             reject(error);
           } else {
+            console.log("Upload Result:", result);
             resolve(result);
           }
-        }
-      )
+        })
         .end(buffer);
-    })
+    });
     return result;
   } catch (error) {
-    throw new ApiError(
-      httpStatus.INTERNAL_SERVER_ERROR,
-      error.message
-    );
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
   }
 };
 
@@ -57,11 +69,7 @@ const deleteFileFromCloudinary = async (publicId) => {
 
     console.log("cloudinary result", result);
   } catch (e) {
-    console.log("cloudinary error", e);
-    throw new ApiError(
-      httpStatus.INTERNAL_SERVER_ERROR,
-      e.message
-    );
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, e.message);
   }
 };
 
