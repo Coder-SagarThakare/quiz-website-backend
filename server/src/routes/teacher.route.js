@@ -39,6 +39,7 @@ router
     subjectController.getSubjectById
   )
   .patch(
+    upload.single("subjectBgImage"),
     validate(subjectValidation.updateSubjectById),
     subjectController.updateSubjectById
   )
