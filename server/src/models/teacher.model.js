@@ -79,7 +79,6 @@ const teacherSchema = mongoose.Schema(
     collegeIdProof: {
       type: String,
       required: true,
-      private : true
     },
     // will used for storing image in cloudinary
     publicId: {
