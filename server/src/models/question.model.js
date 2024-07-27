@@ -11,6 +11,11 @@ const questionSchema = mongoose.Schema(
       required: true,
       index: true
     },
+    createdBy: {
+      type: objectId,
+      required: true,
+      ref: "teacher",
+    },
     question: {
       type: String,
       required: true,

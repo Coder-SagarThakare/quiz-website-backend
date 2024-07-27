@@ -48,4 +48,8 @@ const addQuestion = {
   }),
 };
 
-module.exports = { addQuestion };
+const deleteQuestionById = {
+    subjectId: paramsIdValidtion,
+};
+
+module.exports = { addQuestion, deleteQuestionById };

@@ -56,7 +56,7 @@ const deleteSubjectById = catchAsync(async (req, res) => {
 
   res
     .status(httpStatus.OK)
-    .send({ message: "Subject deleted successfully !!!" });
+    .send({ message: "Subject deleted successfully" });
 });
 
 module.exports = {

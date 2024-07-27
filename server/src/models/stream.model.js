@@ -21,7 +21,8 @@ const streamSchema = mongoose.Schema(
     },
     createdBy: {
       type: objectId,
-      required: true
+      required: true,
+      ref : "user"  // if admin is in user then it will work correctely otherwise not
     },
   },
   {
