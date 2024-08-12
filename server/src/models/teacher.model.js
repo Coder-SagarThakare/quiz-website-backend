@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { private } = require("./plugins");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
-
+  
 
 const teacherSchema = mongoose.Schema(
   {

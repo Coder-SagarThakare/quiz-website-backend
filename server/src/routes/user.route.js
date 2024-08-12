@@ -31,7 +31,7 @@ router.get(
 ); // add validation
 
 router.get(
-  "/stream/subject/:subject_id",
+  "/stream/subject/:subject_id/topics",
   validate(topicValidation.getTopicsBySubjectId),
   topicController.getTopicsBySubjectId
 );
