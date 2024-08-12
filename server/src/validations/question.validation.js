@@ -48,6 +48,7 @@ const addQuestion = {
   }),
 };
 
+<<<<<<< HEAD
 const getQuestionsByTopicId = {
   params: Joi.object().keys({
     topicId: paramsIdValidtion,
@@ -55,3 +56,10 @@ const getQuestionsByTopicId = {
 };
 
 module.exports = { addQuestion, getQuestionsByTopicId };
+=======
+const deleteQuestionById = {
+    subjectId: paramsIdValidtion,
+};
+
+module.exports = { addQuestion, deleteQuestionById };
+>>>>>>> 9da06a2d4bc29182f3cd966e1c887e8e4300cf1e

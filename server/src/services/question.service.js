@@ -21,7 +21,20 @@ const getQuestionsByTopicId = async (topicId) => {
   return questionArray;
 };
 
+const QuestionNotFoundErr = () => {
+    throw new ApiError(httpStatus.NOT_FOUND, "Question not found ");
+}
+
+const deleteQuestionById = async (questionId) => {
+    const resp = await Question.deleteOne({ _id: questionId })
+
+    if (!resp.deletedCount) QuestionNotFoundErr();
+
+    return resp
+}
+
 module.exports = {
-  addQuestion,
-  getQuestionsByTopicId,
-};
+    addQuestion,
+    deleteQuestionById,
+    getQuestionsByTopicId,
+}

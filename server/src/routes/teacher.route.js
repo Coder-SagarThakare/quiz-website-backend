@@ -74,6 +74,10 @@ router
 // add question to perticular topic
 router
   .route("/topic/:topicId/add-question")
-  .post(validate(questionValidation.addQuestion), questionController.addQuestion);
+  .post(validate(questionValidation.addQuestion), questionController.addQuestion)
+
+router
+  .route("/topic/question/:questionId")
+  .delete(validate(questionValidation.deleteQuestionById), questionController.deleteQuestionById)
 
 module.exports = router;
