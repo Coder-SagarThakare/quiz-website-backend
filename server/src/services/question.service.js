@@ -16,7 +16,7 @@ const addQuestion = async (questionBody, topicId) => {
 };
 
 const getQuestionsByTopicId = async (topicId) => {
-  const questionArray = await Question.find({ topic: topicId }).limit(5);
+  const questionArray = await Question.find({ topic: topicId }).limit(5).select("-correctOption");
   console.log(questionArray);
   return questionArray;
 };

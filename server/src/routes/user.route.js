@@ -18,7 +18,7 @@ const router = require("express").Router();
 // Token authentication for all routes defined in this file
 router.use(auth("student"));
 
-// get,update user
+// get,update user self data
 router
   .route("/self")
   .get(userController.getUser)
@@ -32,13 +32,13 @@ router.get(
   subjectController.getSubjectsByStreamId
 ); // add validation
 
-router.get(
+router.get (
   "/stream/subject/:subject_id/topics",
   validate(topicValidation.getTopicsBySubjectId),
   topicController.getTopicsBySubjectId
 );
 
-router.get(
+router.get (
   "/stream/subject/topics/:topicId",
   validate(questionValidation.getQuestionsByTopicId),
   questionController.getQuestionsByTopicId
