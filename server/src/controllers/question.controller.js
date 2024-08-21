@@ -12,8 +12,10 @@ const addQuestion = catchAsync(async (req, res) => {
 });
 
 const getQuestionsByTopicId = catchAsync(async (req, res) => {
+
   const questionArray = await questionService.getQuestionsByTopicId(
-    req.params.topicId
+    req.params.topicId,
+    req.query.level
   );
 
   res.status(httpStatus.OK).send(questionArray);

@@ -52,6 +52,9 @@ const getQuestionsByTopicId = {
   params: Joi.object().keys({
     topicId: paramsIdValidtion,
   }),
+  query: Joi.object().keys({
+    level: Joi.string().valid("easy", "medium", "hard").required(),
+  })
 };
 
 const deleteQuestionById = {

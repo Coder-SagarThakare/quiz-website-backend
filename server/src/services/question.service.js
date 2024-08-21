@@ -15,26 +15,26 @@ const addQuestion = async (questionBody, topicId) => {
   return await Question.create(questionBody);
 };
 
-const getQuestionsByTopicId = async (topicId) => {
-  const questionArray = await Question.find({ topic: topicId }).limit(5).select("-correctOption");
-  console.log(questionArray);
+const getQuestionsByTopicId = async (topicId, level) => {
+
+  const questionArray = await Question.find({ topic: topicId , level }).limit(10).select("-correctOption");
   return questionArray;
 };
 
 const QuestionNotFoundErr = () => {
-    throw new ApiError(httpStatus.NOT_FOUND, "Question not found ");
+  throw new ApiError(httpStatus.NOT_FOUND, "Question not found ");
 }
 
 const deleteQuestionById = async (questionId) => {
-    const resp = await Question.deleteOne({ _id: questionId })
+  const resp = await Question.deleteOne({ _id: questionId })
 
-    if (!resp.deletedCount) QuestionNotFoundErr();
+  if (!resp.deletedCount) QuestionNotFoundErr();
 
-    return resp
+  return resp
 }
 
 module.exports = {
-    addQuestion,
-    deleteQuestionById,
-    getQuestionsByTopicId,
+  addQuestion,
+  deleteQuestionById,
+  getQuestionsByTopicId,
 }
