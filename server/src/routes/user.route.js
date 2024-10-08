@@ -44,4 +44,5 @@ router.get (
   questionController.getQuestionsByTopicId
 );
 
+router.post("/result");
 module.exports = router;
