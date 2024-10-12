@@ -3,6 +3,7 @@ const {
   subjectController,
   topicController,
   questionController,
+  testController
 } = require("../controllers");
 const auth = require("../middlewares/auth");
 const validate = require("../middlewares/validate");
@@ -44,5 +45,6 @@ router.get (
   questionController.getQuestionsByTopicId
 );
 
-router.post("/result");
+// add validation here
+router.post("/result",testController.checkAnswers);
 module.exports = router;
